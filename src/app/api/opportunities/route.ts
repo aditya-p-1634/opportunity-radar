@@ -4,6 +4,8 @@ import { searchSchema } from "@/lib/validations";
 import { jsonOk, handleApiError } from "@/lib/api";
 import { computeRecommendation } from "@/lib/engines/recommendation";
 import { Prisma } from "@prisma/client";
+import { z } from "zod";
+import { jsonError } from "@/lib/api";
 
 export async function GET(request: Request) {
   try {
@@ -148,3 +150,122 @@ export async function GET(request: Request) {
     return handleApiError(err);
   }
 }
+
+const createOpportunitySchema = z.object({
+  title: z.string().min(2).max(200),
+  description: z.string().min(10),
+  type: z.string(),
+  institutionName: z.string().min(2),
+  institutionCountry: z.string().min(2).default("India"),
+  discoveredVia: z.enum([
+    "Official Website",
+    "Email",
+    "Twitter/X",
+    "LinkedIn",
+    "Discord",
+    "Professor",
+    "Friend",
+    "Newsletter",
+    "Manual",
+    "Other",
+  ]),
+  url: z.string().url().nullable().optional().or(z.literal("")),
+  minCgpa: z.number().min(0).max(10).nullable().optional(),
+  minDegree: z.enum(["HIGH_SCHOOL", "BACHELORS", "MASTERS", "PHD"]).nullable().optional(),
+  maxDegree: z.enum(["HIGH_SCHOOL", "BACHELORS", "MASTERS", "PHD"]).nullable().optional(),
+  branches: z.array(z.string()).default([]),
+  funding: z.enum(["FULL", "PARTIAL", "STIPEND", "UNPAID", "NONE"]).default("NONE"),
+  fundingAmount: z.string().max(100).nullable().optional(),
+  mode: z.enum(["ONSITE", "REMOTE", "HYBRID"]).default("ONSITE"),
+  duration: z.string().max(100).nullable().optional(),
+  deadline: z.string().nullable().optional(),
+});
+
+export async function POST(request: Request) {
+  try {
+    const session = await auth();
+    if (!session?.user?.id) return jsonError("Unauthorized", 401);
+
+    const body = await request.json();
+    const data = createOpportunitySchema.parse(body);
+
+    const slugify = (text: string) =>
+      text
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/[^\w\-]+/g, "")
+        .replace(/\-\-+/g, "-");
+
+    const instSlug = slugify(data.institutionName);
+
+    // 1. Transparent findOrCreate for Institution
+    let institution = await db.institution.findUnique({
+      where: { slug: instSlug },
+    });
+
+    if (!institution) {
+      institution = await db.institution.create({
+        data: {
+          name: data.institutionName,
+          slug: instSlug,
+          type: "UNIVERSITY",
+          country: data.institutionCountry,
+          verified: false,
+        },
+      });
+    }
+
+    // 2. Generate unique slug for opportunity
+    const oppSlugBase = slugify(data.title);
+    let oppSlug = oppSlugBase;
+    let count = 0;
+    while (true) {
+      const existing = await db.opportunity.findUnique({
+        where: { slug: oppSlug },
+      });
+      if (!existing) break;
+      count++;
+      oppSlug = `${oppSlugBase}-${count}`;
+    }
+
+    // 3. Compute unique sourceHash
+    const sourceUrl = data.url || null;
+    const { createHash } = await import("crypto");
+    const sourceHash = createHash("sha256")
+      .update(sourceUrl || `${oppSlug}-${institution.id}-${Date.now()}`)
+      .digest("hex");
+
+    // 4. Create Opportunity
+    const newOpportunity = await db.opportunity.create({
+      data: {
+        institutionId: institution.id,
+        title: data.title,
+        slug: oppSlug,
+        type: data.type,
+        description: data.description,
+        minDegree: data.minDegree || null,
+        maxDegree: data.maxDegree || null,
+        minCgpa: data.minCgpa || null,
+        branches: JSON.stringify(data.branches),
+        funding: data.funding,
+        fundingAmount: data.fundingAmount || null,
+        mode: data.mode,
+        duration: data.duration || null,
+        deadline: data.deadline ? new Date(data.deadline) : null,
+        officialUrl: sourceUrl,
+        sourceUrl,
+        sourceHash,
+        discoveredVia: data.discoveredVia,
+        status: "ACTIVE",
+        verified: false,
+      },
+    });
+
+    return jsonOk(newOpportunity);
+  } catch (err) {
+    return handleApiError(err);
+  }
+}
+

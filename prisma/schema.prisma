@@ -199,6 +199,7 @@ model Opportunity {
   saveCount       Int       @default(0)
   sourceUrl       String?
   sourceHash      String?   @unique // for deduplication
+  discoveredVia   String?   @default("MANUAL")
   crawledAt       DateTime?
   publishedAt     DateTime  @default(now())
   createdAt       DateTime  @default(now())

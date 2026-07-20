@@ -9,7 +9,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { OPPORTUNITY_TYPES, opportunityTypeLabel, COUNTRIES, FUNDING_TYPES, fundingLabel } from "@/lib/utils";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X, Plus } from "lucide-react";
+import Link from "next/link";
 
 function OpportunitiesContent() {
   const searchParams = useSearchParams();
@@ -60,11 +61,18 @@ function OpportunitiesContent() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold tracking-tight">Opportunities</h1>
-        <p className="mt-1 text-sm text-zinc-500">
-          {total > 0 ? `${total} opportunities` : "Browse and filter the full catalog"}
-        </p>
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">Opportunities</h1>
+          <p className="mt-1 text-sm text-zinc-500">
+            {total > 0 ? `${total} opportunities` : "Browse and filter the full catalog"}
+          </p>
+        </div>
+        <Link href="/opportunities/new">
+          <Button className="gap-1 bg-indigo-600 hover:bg-indigo-500 text-white font-medium">
+            <Plus className="h-4 w-4" /> Add Opportunity
+          </Button>
+        </Link>
       </div>
 
       <div className="mb-6 flex flex-col gap-3 sm:flex-row">
