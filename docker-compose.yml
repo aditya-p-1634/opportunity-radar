@@ -1,0 +1,40 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: file:./data/prod.db
+      AUTH_SECRET: ${AUTH_SECRET:-change-me-in-production-use-openssl-rand}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      AUTH_URL: ${AUTH_URL:-http://localhost:3000}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      AUTH_GOOGLE_ID: ${AUTH_GOOGLE_ID:-}
+      AUTH_GOOGLE_SECRET: ${AUTH_GOOGLE_SECRET:-}
+      CRON_SECRET: ${CRON_SECRET:-change-me}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-Opportunity Radar <noreply@opportunityradar.app>}
+    volumes:
+      - or-data:/app/data
+      - or-uploads:/app/public/uploads
+    restart: unless-stopped
+
+  # Optional PostgreSQL for multi-instance production
+  # Uncomment and set DATABASE_URL=postgresql://radar:radar@db:5432/opportunity_radar
+  # db:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_USER: radar
+  #     POSTGRES_PASSWORD: radar
+  #     POSTGRES_DB: opportunity_radar
+  #   volumes:
+  #     - or-pg:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+volumes:
+  or-data:
+  or-uploads:
