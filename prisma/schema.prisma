@@ -200,6 +200,9 @@ model Opportunity {
   sourceUrl       String?
   sourceHash      String?   @unique // for deduplication
   discoveredVia   String?   @default("MANUAL")
+  requiredSkills  String    @default("[]") // JSON stringified array of required skills
+  lastVerified    DateTime  @default(now())
+  confidenceScore Float     @default(1.0)
   crawledAt       DateTime?
   publishedAt     DateTime  @default(now())
   createdAt       DateTime  @default(now())

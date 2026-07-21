@@ -124,6 +124,9 @@ export function opportunityTypeLabel(type: string): string {
     COMPETITION: "Competition",
     CONFERENCE: "Conference",
     JOB: "Job / Full-time",
+    SUMMER_PROGRAM: "Summer Program",
+    PROJECT_STAFF: "Project Staff",
+    JRF_SRF_RA: "JRF/SRF/RA",
     OTHER: "Other",
   };
   return map[type] ?? type;
@@ -184,6 +187,9 @@ export const OPPORTUNITY_TYPES = [
   "COMPETITION",
   "CONFERENCE",
   "JOB",
+  "SUMMER_PROGRAM",
+  "PROJECT_STAFF",
+  "JRF_SRF_RA",
   "OTHER",
 ] as const;
 

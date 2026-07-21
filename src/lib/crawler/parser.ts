@@ -7,6 +7,7 @@ export interface NormalizedFields {
   branches: string[];
   funding: "FULL" | "PARTIAL" | "STIPEND" | "UNPAID" | "NONE";
   mode: "ONSITE" | "REMOTE" | "HYBRID";
+  requiredSkills: string[];
 }
 
 /**
@@ -114,7 +115,20 @@ export function parseFieldsDeterminstically(title: string, description: string):
     branches.push("Computer Science", "Electrical Engineering");
   }
 
-  // 4. Funding
+  // 4. Required Skills Extraction
+  const skillList = [
+    "Python", "PyTorch", "TensorFlow", "C++", "C", "Java", "MATLAB", "SolidWorks", 
+    "AutoCAD", "Rust", "LaTeX", "Machine Learning", "Deep Learning", "SQL", "Git"
+  ];
+  const requiredSkills: string[] = [];
+  for (const skill of skillList) {
+    const regex = new RegExp(`\\b${skill.replace("+", "\\+")}\\b`, "i");
+    if (regex.test(corpus)) {
+      requiredSkills.push(skill);
+    }
+  }
+
+  // 5. Funding
   let funding: NormalizedFields["funding"] = "NONE";
   if (/(?:fully funded|full funding|full scholarship|housing included|travel expenses)/i.test(corpus)) {
     funding = "FULL";
@@ -129,7 +143,7 @@ export function parseFieldsDeterminstically(title: string, description: string):
     funding = /intern|project/i.test(title) ? "STIPEND" : "NONE";
   }
 
-  // 5. Work Mode
+  // 6. Work Mode
   let mode: NormalizedFields["mode"] = "ONSITE";
   if (/(?:remote|work from home|wfh|anywhere)/i.test(corpus)) {
     mode = "REMOTE";
@@ -139,7 +153,7 @@ export function parseFieldsDeterminstically(title: string, description: string):
     mode = "ONSITE";
   }
 
-  return { minCgpa, minDegree, maxDegree, branches, funding, mode };
+  return { minCgpa, minDegree, maxDegree, branches, funding, mode, requiredSkills };
 }
 
 /**
@@ -170,6 +184,7 @@ Currently extracted fields:
 - Preferred Branches: ${current.branches.join(", ")}
 - Funding Option ("FULL" | "PARTIAL" | "STIPEND" | "UNPAID" | "NONE"): ${current.funding}
 - Work Mode ("ONSITE" | "REMOTE" | "HYBRID"): ${current.mode}
+- Required Skills: ${current.requiredSkills.join(", ")}
 
 Task: Adjust/refine these fields if the description provides more specific details that the regex missed.
 If CGPA is specified on a 4.0 scale, convert it to a 10.0 scale.
@@ -180,7 +195,8 @@ Output a JSON object matching this schema:
   "maxDegree": "HIGH_SCHOOL" | "BACHELORS" | "MASTERS" | "PHD" | null,
   "branches": string[],
   "funding": "FULL" | "PARTIAL" | "STIPEND" | "UNPAID" | "NONE",
-  "mode": "ONSITE" | "REMOTE" | "HYBRID"
+  "mode": "ONSITE" | "REMOTE" | "HYBRID",
+  "requiredSkills": string[]
 }
 Output only the JSON block. Nothing else.
 `;
@@ -209,6 +225,7 @@ Output only the JSON block. Nothing else.
           branches: parsed.branches ?? current.branches,
           funding: parsed.funding ?? current.funding,
           mode: parsed.mode ?? current.mode,
+          requiredSkills: parsed.requiredSkills ?? current.requiredSkills,
         };
       }
     }
@@ -317,6 +334,82 @@ function generateSimulatedHtml(slug: string): string {
             </p>
             <span class="deadline-info">${dateStr(20)}</span>
           </div>
+        </div>
+      </body>
+      </html>
+    `;
+  }
+
+  if (slug === "iit-gandhinagar") {
+    return `
+      <!DOCTYPE html>
+      <html>
+      <body>
+        <div class="srip-list">
+          <div class="srip-project-card">
+            <h4 class="srip-title">SRIP Project Intern: AI in Geological Mapping</h4>
+            <a class="srip-link" href="https://srip.iitgn.ac.in/projects/ai-geo">Details</a>
+            <div class="srip-description">
+              Professor Amy is seeking interns for research in geology neural nets. Needs Python and PyTorch. Minimum CGPA of 8.5/10. Stipend: INR 2000 per week.
+            </div>
+            <span class="srip-deadline">${dateStr(30)}</span>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+  }
+
+  if (slug === "iit-kanpur") {
+    return `
+      <!DOCTYPE html>
+      <html>
+      <body>
+        <div class="surge-vacancy">
+          <span class="surge-name">IITK SURGE Fellow: Fluid Dynamics Simulation</span>
+          <a href="https://iitk.ac.in/doaa/surge/fluid-simulation" class="surge-url">View details</a>
+          <p class="surge-details">
+            Research intern for fluid dynamics simulations. Required skills: MATLAB, fluid mechanics, C++. Minimum CGPA 8.5. Consolidated stipend provided.
+          </p>
+          <div class="surge-last-date">${dateStr(25)}</div>
+        </div>
+      </body>
+      </html>
+    `;
+  }
+
+  if (slug === "tifr-mumbai") {
+    return `
+      <!DOCTYPE html>
+      <html>
+      <body>
+        <ul>
+          <li class="vsrp-listing">
+            <h3 class="vsrp-heading">TIFR Summer Research: Quantum Theory of Materials</h3>
+            <a class="vsrp-btn" href="https://univ.tifr.res.in/vsrp/projects-quantum">Apply Program</a>
+            <span class="vsrp-summary">
+              VSRP project in physics area. Target: Physics, chemistry, computer science majors. Travel tickets and stipend of 8000 INR/month will be provided. Required skills: LaTeX, Physics formulas.
+            </span>
+            <div class="vsrp-date">${dateStr(20)}</div>
+          </li>
+        </ul>
+      </body>
+      </html>
+    `;
+  }
+
+  if (slug === "iasc-srfp") {
+    return `
+      <!DOCTYPE html>
+      <html>
+      <body>
+        <div class="srfp-call">
+          <h2 class="srfp-header">Science Academies Summer Research Fellowship Program 2026</h2>
+          <a class="srfp-portal-link" href="https://web-japps.ias.ac.in/play/sfp-online">Apply Online</a>
+          <div class="srfp-body">
+            Fellowship for students and teachers. Requires registration via portal. Stipend: INR 12,000 consolidated stipend and train pass. Areas: Chemistry, Mathematics, Physics. Python skills preferred.
+          </div>
+          <span class="srfp-cutoff">${dateStr(35)}</span>
         </div>
       </body>
       </html>

@@ -9,7 +9,8 @@ import { createHash } from "crypto";
 import { db } from "@/lib/db";
 import { slugify, uniqueSlug, hashString } from "@/lib/utils";
 import { CRAWLER_REGISTRY } from "./registry";
-import { fetchPageContent, parseFieldsDeterminstically, parseFieldsWithGemini } from "./parser";
+import { retrieve } from "./retriever";
+import { parseFieldsDeterminstically, parseFieldsWithGemini } from "./parser";
 
 export interface CrawlResult {
   jobId: string;
@@ -107,14 +108,33 @@ export async function runCrawler(institutionId?: string): Promise<CrawlResult> {
   try {
     await log(job.id, "INFO", "Crawler job started", { institutionId });
 
-    // Fetch target institutions. If running a complete crawl, target IISc Bangalore, IIT Bombay, and IIT Madras.
-    const institutions = await db.institution.findMany({
-      where: institutionId
-        ? { id: institutionId }
-        : {
-            slug: { in: ["iisc-bangalore", "iit-bombay", "iit-madras"] },
-          },
-    });
+    // Fetch/initialize target institutions. If running a complete crawl, target all registered scrapers.
+    const targetSlugs = institutionId ? [] : Object.keys(CRAWLER_REGISTRY);
+    const institutions = [];
+
+    if (institutionId) {
+      const inst = await db.institution.findUnique({ where: { id: institutionId } });
+      if (inst) institutions.push(inst);
+    } else {
+      for (const slug of targetSlugs) {
+        const config = CRAWLER_REGISTRY[slug];
+        if (!config) continue;
+        let inst = await db.institution.findUnique({ where: { slug } });
+        if (!inst) {
+          inst = await db.institution.create({
+            data: {
+              name: config.name,
+              slug: config.slug,
+              type: config.type,
+              country: config.country,
+              city: config.city || "Unknown",
+              verified: true,
+            },
+          });
+        }
+        institutions.push(inst);
+      }
+    }
 
     if (institutions.length === 0) {
       throw new Error("No target institutions found in database");
@@ -148,7 +168,21 @@ export async function runCrawler(institutionId?: string): Promise<CrawlResult> {
 
       try {
         // 1. Fetch content from target page
-        const html = await fetchPageContent(config.crawlUrl, config.slug);
+        const retrievalResult = await retrieve(config.slug, config.crawlUrl, config.retrievalProfile, {
+          cookieUrl: config.cookieUrl,
+        });
+
+        if (retrievalResult.error) {
+          throw new Error(`Retrieval failed: ${retrievalResult.error}`);
+        }
+
+        await log(job.id, "INFO", `Successfully retrieved content for ${institution.name}`, {
+          statusCode: retrievalResult.statusCode,
+          strategyUsed: retrievalResult.strategyUsed,
+          retrievalTime: retrievalResult.retrievalTime,
+        });
+
+        const html = retrievalResult.content;
 
         // 2. Parse raw opportunity details
         const rawOpps = config.parse(html);
@@ -177,10 +211,16 @@ export async function runCrawler(institutionId?: string): Promise<CrawlResult> {
             where: { sourceHash },
           });
 
-          const type = classifyOpportunityType(item.title, item.description);
+          const type = item.type || classifyOpportunityType(item.title, item.description);
           const researchArea = classifyResearchArea(item.title, item.description);
           const fundingAmount = getFundingAmountLabel(normalized.funding, institution.country);
           const deadline = item.deadline ?? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // Default 30 days
+
+          // Calculate confidenceScore
+          let confidenceScore = 0.5;
+          if (normalized.minCgpa !== null) confidenceScore += 0.2;
+          if (item.deadline !== null && item.deadline !== undefined) confidenceScore += 0.2;
+          if (normalized.funding !== "NONE") confidenceScore += 0.1;
 
           if (existing) {
             // Update mutable fields in database
@@ -198,6 +238,10 @@ export async function runCrawler(institutionId?: string): Promise<CrawlResult> {
                 mode: normalized.mode,
                 deadline,
                 crawledAt: new Date(),
+                // Updated fields
+                requiredSkills: JSON.stringify(normalized.requiredSkills),
+                confidenceScore,
+                lastVerified: new Date(),
               },
             });
             instUpdated++;
@@ -258,6 +302,10 @@ export async function runCrawler(institutionId?: string): Promise<CrawlResult> {
               publishedAt: new Date(),
               institutionId: institution.id,
               slug,
+              // Updated fields
+              requiredSkills: JSON.stringify(normalized.requiredSkills),
+              confidenceScore,
+              lastVerified: new Date(),
             },
           });
 
