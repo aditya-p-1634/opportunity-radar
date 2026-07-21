@@ -93,13 +93,22 @@ function getFundingAmountLabel(funding: string, country?: string | null): string
 /**
  * Runs crawl job for targeting config-registered institutions (IISc, IITB, IITM).
  */
-export async function runCrawler(institutionId?: string): Promise<CrawlResult> {
+export async function runCrawler(
+  institutionId?: string,
+  options?: { schedulerType?: string; targetGroup?: string }
+): Promise<CrawlResult> {
+  const startTime = Date.now();
+  const schedulerType = options?.schedulerType ?? "MANUAL";
+  const targetGroup = options?.targetGroup ?? "ALL";
+
   const job = await db.crawlerJob.create({
     data: {
       institutionId: institutionId ?? null,
-      name: institutionId ? `Crawl institution ${institutionId}` : "Modular MVP crawl (IISc, IITB, IITM)",
+      name: institutionId ? `Crawl institution ${institutionId}` : `Batch Crawl (${targetGroup})`,
       status: "RUNNING",
       startedAt: new Date(),
+      schedulerType,
+      targetGroup,
     },
   });
 
@@ -107,6 +116,7 @@ export async function runCrawler(institutionId?: string): Promise<CrawlResult> {
   let totalAdded = 0;
   let totalUpdated = 0;
   let totalSkipped = 0;
+  let errorsCount = 0;
 
   try {
     await log(job.id, "INFO", "Crawler job started", { institutionId });
@@ -362,48 +372,46 @@ export async function runCrawler(institutionId?: string): Promise<CrawlResult> {
           itemsSkipped: instSkipped,
         });
 
+        errorsCount++;
         // Continue execution to remaining institutions
       }
     }
 
-    // Close expired ones
-    const closed = await db.opportunity.updateMany({
-      where: {
-        status: "ACTIVE",
-        deadline: { lt: new Date() },
-      },
-      data: { status: "CLOSED" },
-    });
-    await log(job.id, "INFO", `Marked ${closed.count} opportunities as CLOSED`);
+    const executionTimeMs = Date.now() - startTime;
 
     await db.crawlerJob.update({
       where: { id: job.id },
       data: {
-        status: "SUCCESS",
+        status: errorsCount > 0 && totalFound === 0 ? "FAILED" : "SUCCESS",
         finishedAt: new Date(),
         itemsFound: totalFound,
         itemsAdded: totalAdded,
         itemsUpdated: totalUpdated,
         itemsSkipped: totalSkipped,
+        executionTimeMs,
+        errorsCount,
       },
     });
 
-    await log(job.id, "INFO", "Crawler job finished successfully", {
+    await log(job.id, "INFO", "Crawler job finished", {
       totalFound,
       totalAdded,
       totalUpdated,
       totalSkipped,
+      errorsCount,
+      executionTimeMs,
     });
 
     return {
       jobId: job.id,
-      status: "SUCCESS",
+      status: errorsCount > 0 && totalFound === 0 ? "FAILED" : "SUCCESS",
       itemsFound: totalFound,
       itemsAdded: totalAdded,
       itemsUpdated: totalUpdated,
       itemsSkipped: totalSkipped,
     };
   } catch (err) {
+    const executionTimeMs = Date.now() - startTime;
     const message = err instanceof Error ? err.message : "Fatal crawler job error";
     await log(job.id, "ERROR", `Crawler run failed: ${message}`);
     await db.crawlerJob.update({
@@ -412,6 +420,8 @@ export async function runCrawler(institutionId?: string): Promise<CrawlResult> {
         status: "FAILED",
         finishedAt: new Date(),
         errorMessage: message,
+        executionTimeMs,
+        errorsCount: errorsCount + 1,
       },
     });
     return {

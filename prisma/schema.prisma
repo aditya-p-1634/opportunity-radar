@@ -203,6 +203,7 @@ model Opportunity {
   requiredSkills  String    @default("[]") // JSON stringified array of required skills
   lastVerified    DateTime  @default(now())
   confidenceScore Float     @default(1.0)
+  firstDiscoveredAt DateTime @default(now())
   crawledAt       DateTime?
   publishedAt     DateTime  @default(now())
   createdAt       DateTime  @default(now())
@@ -331,6 +332,10 @@ model CrawlerJob {
   itemsAdded    Int       @default(0)
   itemsUpdated  Int       @default(0)
   itemsSkipped  Int       @default(0)
+  schedulerType String    @default("MANUAL") // MANUAL | CRON_HOURLY | CRON_DAILY | CLI
+  targetGroup   String    @default("ALL")
+  executionTimeMs Int     @default(0)
+  errorsCount   Int       @default(0)
   errorMessage  String?
   createdAt     DateTime  @default(now())
   institution   Institution? @relation(fields: [institutionId], references: [id], onDelete: SetNull)

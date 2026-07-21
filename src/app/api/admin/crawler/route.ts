@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { jsonOk, jsonError, handleApiError } from "@/lib/api";
-import { runCrawler } from "@/lib/crawler";
+import { executeScheduledCrawl } from "@/lib/crawler/scheduler";
 import { z } from "zod";
 
 export async function GET() {
@@ -32,16 +32,32 @@ export async function POST(request: Request) {
     if (session.user.role !== "ADMIN") return jsonError("Forbidden", 403);
 
     let institutionId: string | undefined;
+    let targetGroup = "ALL";
     try {
       const body = await request.json();
-      const parsed = z.object({ institutionId: z.string().optional() }).parse(body);
+      const parsed = z
+        .object({
+          institutionId: z.string().optional(),
+          targetGroup: z.string().optional(),
+        })
+        .parse(body);
       institutionId = parsed.institutionId;
+      targetGroup = parsed.targetGroup || "ALL";
     } catch {
       // empty body ok
     }
 
-    const result = await runCrawler(institutionId);
-    return jsonOk(result);
+    const response = await executeScheduledCrawl({
+      trigger: "MANUAL",
+      targetGroup,
+      institutionId,
+    });
+
+    if (response.status === "BUSY_LOCKED") {
+      return jsonError(response.message, 409);
+    }
+
+    return jsonOk(response);
   } catch (err) {
     return handleApiError(err);
   }

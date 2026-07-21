@@ -16,7 +16,6 @@ import {
   opportunityTypeLabel,
   fundingLabel,
   modeLabel,
-  eligibilityLabel,
   deadlineUrgency,
   cn,
 } from "@/lib/utils";
@@ -30,6 +29,11 @@ import {
   Banknote,
   BadgeCheck,
   ArrowLeft,
+  Code2,
+  GraduationCap,
+  Building2,
+  CalendarDays,
+  ShieldCheck,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -55,11 +59,8 @@ interface Detail {
   officialUrl: string | null;
   applicationUrl: string | null;
   verified: boolean;
-  viewCount: number;
-  matchScore: number;
-  matchReasons: string[];
-  matchFactors: Record<string, number>;
-  eligibility: { status: string; score: number; reasons: string[] };
+  requiredSkills?: string | string[] | null;
+  confidenceScore?: number;
   bookmarked: boolean;
   application: { status: string } | null;
   institution: {
@@ -68,6 +69,7 @@ interface Detail {
     slug: string;
     logoUrl: string | null;
     country: string;
+    city?: string | null;
     overview: string | null;
     prestigeScore: number;
   };
@@ -102,7 +104,7 @@ export default function OpportunityDetailPage() {
     });
     if (res.ok) {
       setBookmarked(!bookmarked);
-      toast.success(bookmarked ? "Removed from saved" : "Saved");
+      toast.success(bookmarked ? "Removed from saved" : "Saved to bookmarks");
     } else {
       const j = await res.json();
       toast.error(j.error || "Sign in to save");
@@ -120,7 +122,7 @@ export default function OpportunityDetailPage() {
       });
       const j = await res.json();
       if (!res.ok) throw new Error(j.error);
-      toast.success("Marked as applied");
+      toast.success("Marked as applied in tracker");
       setData({ ...data, application: { status: "APPLIED" } });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Failed");
@@ -130,30 +132,36 @@ export default function OpportunityDetailPage() {
   }
 
   if (loading) return <div className="skeleton h-96 rounded-2xl" />;
-  if (!data) return <div className="text-zinc-500">Opportunity not found.</div>;
+  if (!data) return <div className="p-12 text-center text-zinc-500">Opportunity not found.</div>;
 
   const urgency = deadlineUrgency(data.deadline);
-  const eligVariant =
-    data.eligibility.status === "ELIGIBLE"
-      ? "success"
-      : data.eligibility.status === "LIKELY"
-        ? "default"
-        : data.eligibility.status === "POSSIBLY"
-          ? "warning"
-          : "danger";
+
+  // Parse required skills
+  let skills: string[] = [];
+  if (Array.isArray(data.requiredSkills)) {
+    skills = data.requiredSkills;
+  } else if (typeof data.requiredSkills === "string") {
+    try {
+      skills = JSON.parse(data.requiredSkills);
+    } catch {
+      skills = [];
+    }
+  }
 
   return (
     <div className="mx-auto max-w-5xl">
       <Link
         href="/opportunities"
-        className="mb-4 inline-flex items-center gap-1 text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+        className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
       >
         <ArrowLeft className="h-4 w-4" /> Back to opportunities
       </Link>
 
       <div className="grid gap-6 lg:grid-cols-3">
+        {/* Main Content Column */}
         <div className="space-y-6 lg:col-span-2">
-          <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
+          {/* Header Card */}
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
             <div className="flex items-start gap-4">
               <InstitutionAvatar
                 name={data.institution.shortName || data.institution.name}
@@ -162,16 +170,19 @@ export default function OpportunityDetailPage() {
               <div className="min-w-0 flex-1">
                 <Link
                   href={`/institutions/${data.institution.slug}`}
-                  className="text-sm text-indigo-600 hover:underline dark:text-indigo-400"
+                  className="text-sm font-medium text-indigo-600 hover:underline dark:text-indigo-400"
                 >
                   {data.institution.name}
                 </Link>
-                <h1 className="mt-1 text-2xl font-semibold tracking-tight">{data.title}</h1>
+                <h1 className="mt-1 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-3xl">
+                  {data.title}
+                </h1>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Badge>{opportunityTypeLabel(data.type)}</Badge>
+                  <Badge variant="outline">{modeLabel(data.mode)}</Badge>
                   {data.verified && (
                     <Badge variant="success" className="gap-1">
-                      <BadgeCheck className="h-3 w-3" /> Verified
+                      <BadgeCheck className="h-3.5 w-3.5" /> Verified Source
                     </Badge>
                   )}
                   {data.researchArea && <Badge variant="secondary">{data.researchArea}</Badge>}
@@ -179,86 +190,114 @@ export default function OpportunityDetailPage() {
               </div>
             </div>
 
+            {/* Quick Metadata Stats Grid */}
             <div className="mt-6 grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
               <Meta icon={MapPin} label="Location" value={data.location || data.country || "—"} />
               <Meta icon={Banknote} label="Funding" value={fundingLabel(data.funding)} />
-              <Meta icon={Clock} label="Duration" value={data.duration || "—"} />
+              <Meta icon={Clock} label="Duration" value={data.duration || "Flexible"} />
               <Meta
-                icon={Clock}
+                icon={CalendarDays}
                 label="Deadline"
                 value={formatDeadline(data.deadline)}
                 className={cn(
-                  urgency === "critical" && "text-red-600",
-                  urgency === "soon" && "text-amber-600"
+                  urgency === "critical" && "text-red-600 font-semibold",
+                  urgency === "soon" && "text-amber-600 font-semibold"
                 )}
               />
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-2">
-              <Button onClick={toggleBookmark} variant="outline">
-                {bookmarked ? <BookmarkCheck className="h-4 w-4" /> : <Bookmark className="h-4 w-4" />}
-                {bookmarked ? "Saved" : "Save"}
-              </Button>
-              <Button onClick={markApplied} disabled={applying || !!data.application}>
-                <Send className="h-4 w-4" />
-                {data.application ? `Applied (${data.application.status})` : "Mark applied"}
-              </Button>
+            {/* Action Bar */}
+            <div className="mt-6 flex flex-wrap gap-3 border-t border-zinc-100 pt-5 dark:border-zinc-900">
               {(data.applicationUrl || data.officialUrl) && (
                 <a
                   href={data.applicationUrl || data.officialUrl || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-10 items-center gap-2 rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white hover:bg-indigo-500"
+                  className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-500"
                 >
-                  Official link <ExternalLink className="h-4 w-4" />
+                  Apply on Official Portal <ExternalLink className="h-4 w-4" />
                 </a>
               )}
+              <Button onClick={markApplied} disabled={applying || !!data.application} variant="secondary">
+                <Send className="h-4 w-4" />
+                {data.application ? `Tracked (${data.application.status})` : "Mark Applied"}
+              </Button>
+              <Button onClick={toggleBookmark} variant="outline">
+                {bookmarked ? <BookmarkCheck className="h-4 w-4 text-indigo-600" /> : <Bookmark className="h-4 w-4" />}
+                {bookmarked ? "Saved" : "Save"}
+              </Button>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-            <h2 className="text-lg font-semibold">About</h2>
+          {/* Description Section */}
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+            <h2 className="text-lg font-semibold tracking-tight">About Opportunity</h2>
             <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
               {data.description}
             </p>
-            {data.eligibilityText && (
-              <>
-                <h3 className="mt-6 font-medium">Eligibility</h3>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{data.eligibilityText}</p>
-              </>
-            )}
-            {data.branches?.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {data.branches.map((b) => (
-                  <Badge key={b} variant="outline">
-                    {b}
-                  </Badge>
-                ))}
+
+            {/* Required Skills */}
+            {skills.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                  <Code2 className="h-4 w-4 text-indigo-500" />
+                  Required Skills & Technologies
+                </h3>
+                <div className="mt-2.5 flex flex-wrap gap-1.5">
+                  {skills.map((skill) => (
+                    <Badge key={skill} variant="secondary" className="px-3 py-1 text-xs">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             )}
-            <dl className="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+
+            {/* Eligibility & Qualifications */}
+            <div className="mt-6 border-t border-zinc-100 pt-5 dark:border-zinc-900">
+              <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                <GraduationCap className="h-4 w-4 text-indigo-500" />
+                Eligibility Criteria
+              </h3>
+              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                {data.eligibilityText || "Open to eligible students in matching academic disciplines."}
+              </p>
+              {data.branches?.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {data.branches.map((b) => (
+                    <Badge key={b} variant="outline">
+                      {b}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Additional Metadata Grid */}
+            <dl className="mt-6 grid gap-4 rounded-xl bg-zinc-50 p-4 text-sm dark:bg-zinc-900/60 sm:grid-cols-2">
               <div>
-                <dt className="text-zinc-500">Mode</dt>
-                <dd className="font-medium">{modeLabel(data.mode)}</dd>
+                <dt className="text-xs text-zinc-500">Work Mode</dt>
+                <dd className="font-semibold text-zinc-800 dark:text-zinc-200">{modeLabel(data.mode)}</dd>
               </div>
               <div>
-                <dt className="text-zinc-500">Funding amount</dt>
-                <dd className="font-medium">{data.fundingAmount || "—"}</dd>
+                <dt className="text-xs text-zinc-500">Funding Amount</dt>
+                <dd className="font-semibold text-zinc-800 dark:text-zinc-200">{data.fundingAmount || "Stipend / Support provided"}</dd>
               </div>
               <div>
-                <dt className="text-zinc-500">Start date</dt>
-                <dd className="font-medium">{formatDate(data.startDate)}</dd>
+                <dt className="text-xs text-zinc-500">Start Date</dt>
+                <dd className="font-semibold text-zinc-800 dark:text-zinc-200">{formatDate(data.startDate)}</dd>
               </div>
               <div>
-                <dt className="text-zinc-500">Min CGPA</dt>
-                <dd className="font-medium">{data.minCgpa ?? "Not specified"}</dd>
+                <dt className="text-xs text-zinc-500">Minimum CGPA Requirement</dt>
+                <dd className="font-semibold text-zinc-800 dark:text-zinc-200">{data.minCgpa ? `${data.minCgpa} / 10.0` : "No strict CGPA cutoff specified"}</dd>
               </div>
             </dl>
           </div>
 
+          {/* Related Opportunities */}
           {data.related?.length > 0 && (
             <div>
-              <h2 className="mb-4 text-lg font-semibold">Related opportunities</h2>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Related Opportunities</h2>
               <div className="grid gap-4 sm:grid-cols-2">
                 {data.related.slice(0, 4).map((o) => (
                   <OpportunityCard key={o.id} opportunity={o} />
@@ -268,79 +307,49 @@ export default function OpportunityDetailPage() {
           )}
         </div>
 
-        {/* Sidebar: match + eligibility */}
+        {/* Sidebar Column */}
         <div className="space-y-4">
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
-            <div className="text-center">
-              <div
-                className={cn(
-                  "text-4xl font-bold tabular-nums",
-                  data.matchScore >= 80
-                    ? "text-emerald-600"
-                    : data.matchScore >= 60
-                      ? "text-indigo-600"
-                      : "text-zinc-500"
-                )}
+          {/* Official Source Card */}
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+            <h3 className="flex items-center gap-2 font-semibold text-zinc-900 dark:text-zinc-50">
+              <ShieldCheck className="h-4 w-4 text-emerald-600" />
+              Verified Official Source
+            </h3>
+            <p className="mt-2 text-xs text-zinc-500">
+              This opportunity was discovered from the official portal of {data.institution.name}.
+            </p>
+            {data.confidenceScore && (
+              <div className="mt-4 flex items-center justify-between text-xs">
+                <span className="text-zinc-500">Source Confidence</span>
+                <span className="font-semibold text-emerald-600">{Math.round(data.confidenceScore * 100)}%</span>
+              </div>
+            )}
+            {data.officialUrl && (
+              <a
+                href={data.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
               >
-                {data.matchScore}%
-              </div>
-              <div className="text-xs uppercase tracking-wide text-zinc-400">Match score</div>
-            </div>
-            <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-              {data.matchReasons?.map((r) => (
-                <Badge key={r} variant="match">
-                  {r}
-                </Badge>
-              ))}
-            </div>
-            {data.matchFactors && (
-              <div className="mt-5 space-y-2">
-                {Object.entries(data.matchFactors).map(([k, v]) => (
-                  <div key={k}>
-                    <div className="mb-0.5 flex justify-between text-[11px] text-zinc-500">
-                      <span className="capitalize">{k.replace(/([A-Z])/g, " $1")}</span>
-                      <span>{Math.round(v)}</span>
-                    </div>
-                    <div className="h-1.5 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
-                      <div
-                        className="h-full rounded-full bg-indigo-500"
-                        style={{ width: `${Math.min(100, v)}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+                View Source Announcement <ExternalLink className="h-3.5 w-3.5" />
+              </a>
             )}
           </div>
 
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
-            <div className="flex items-center justify-between">
-              <h3 className="font-medium">Eligibility</h3>
-              <Badge variant={eligVariant as "success"}>{eligibilityLabel(data.eligibility.status)}</Badge>
+          {/* Institution Card */}
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm text-sm dark:border-zinc-800 dark:bg-zinc-950">
+            <div className="flex items-center gap-3">
+              <Building2 className="h-5 w-5 text-indigo-600" />
+              <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{data.institution.name}</h3>
             </div>
-            <ul className="mt-3 space-y-2">
-              {data.eligibility.reasons.map((r, i) => (
-                <li key={i} className="flex gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
-                  {r}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 text-sm dark:border-zinc-800 dark:bg-zinc-950">
-            <h3 className="font-medium">Institution</h3>
-            <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-              {data.institution.overview?.slice(0, 160)}…
-            </p>
-            <p className="mt-2 text-xs text-zinc-500">
-              Prestige score: {data.institution.prestigeScore}/100
+            <p className="mt-3 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+              {data.institution.overview?.slice(0, 180) || `${data.institution.name} is a premier research institution.`}…
             </p>
             <Link
               href={`/institutions/${data.institution.slug}`}
-              className="mt-3 inline-block text-indigo-600 hover:underline dark:text-indigo-400"
+              className="mt-3 inline-block text-xs font-medium text-indigo-600 hover:underline dark:text-indigo-400"
             >
-              View institution →
+              Explore Institution Profile →
             </Link>
           </div>
         </div>
@@ -366,7 +375,7 @@ function Meta({
         <Icon className="h-3.5 w-3.5" />
         {label}
       </div>
-      <div className={cn("mt-1 font-medium", className)}>{value}</div>
+      <div className={cn("mt-1 font-semibold text-zinc-800 dark:text-zinc-200", className)}>{value}</div>
     </div>
   );
 }
