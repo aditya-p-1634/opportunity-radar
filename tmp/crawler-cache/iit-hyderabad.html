@@ -1,0 +1,3378 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/images/favicon.png">
+    <title>Home | IIT Hyderabad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137608318-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-137608318-1');
+    </script>
+        <style>
+/* Frutiger LT Pro – Regular */
+@font-face {
+    font-family: "FrutigerLTPro";
+    src: url("/assets/fonts/frutiger/FrutigerLTPro-Roman.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Light */
+@font-face {
+    font-family: "FrutigerLTPro";
+    src: url("/assets/fonts/frutiger/FrutigerLTPro-Light.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Bold */
+@font-face {
+    font-family: "FrutigerLTPro";
+    src: url("/assets/fonts/frutiger/FrutigerLTPro-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Black */
+@font-face {
+    font-family: "FrutigerLTPro";
+    src: url("/assets/fonts/frutiger/FrutigerLTPro-Black.otf") format("opentype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Italic */
+@font-face {
+    font-family: "FrutigerLTPro";
+    src: url("/assets/fonts/frutiger/FrutigerLTPro-Italic.otf") format("opentype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+body {
+    font-family: "FrutigerLTPro", Arial, Helvetica, sans-serif;
+    background-color: #FDFBF8;
+    color: #333333;
+}
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .carousel-container {
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #D97706; /* Amber-600 */
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .hero-gradient {
+            background: linear-gradient(to top, rgba(253, 251, 248, 1) 0%, rgba(253, 251, 248, 0) 100%);
+        }
+        .hero-carousel-slide img {
+            height: 60vh; /* Responsive height for hero slider */
+            max-height: 500px; /* Max height for larger screens */
+        }
+        @media (min-width: 768px) {
+            .hero-carousel-slide img {
+                height: 70vh;
+                max-height: 600px;
+            }
+        }
+
+
+/* Announcement scrolling animation */
+.announcement-track {
+    animation: scroll-announcements 25s linear infinite;
+}
+
+/* Pause on hover */
+.announcement-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-announcements {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Director image scroll animation */
+.director-photo {
+    transform: translateY(24px) scale(1.02);
+    transition:
+        opacity 0.8s ease-out,
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.director-photo.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Track */
+.innovation-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-innovations 15s linear infinite;
+}
+
+.innovation-track:hover {
+    animation-play-state: paused;
+}
+
+/* Group */
+.innovation-group {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* TRUE infinite animation */
+@keyframes scroll-innovations {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+
+/* Large card for detailed innovation */
+.innovation-card-lg {
+    min-width: 420px;
+    max-width: 420px;
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 28px -16px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.innovation-card-lg:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -22px rgba(0,0,0,0.3);
+}
+
+.innovation-card-lg img {
+    width: 100%;
+    aspect-ratio: 1 / 1;   /* modern browsers */
+    object-fit: cover;
+}
+
+.innovation-card-lg h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.innovation-card-lg p {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #475569;
+}
+
+/* YouTube vertical scroll */
+
+.youtube-viewport {
+    height: 600px;        /* ≈ 3 cards */
+    overflow: hidden;
+}
+
+.youtube-track {
+    animation: scroll-youtube 20s linear infinite;
+}
+
+.youtube-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-youtube {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* Card tweaks */
+.youtube-card img {
+    flex-shrink: 0;
+}
+
+.aspect-square img {
+    transition: transform 0.4s ease;
+}
+.bg-white:hover .aspect-square img {
+    transform: scale(1.05);
+}
+
+.aspect-square {
+    position: relative;
+}
+.aspect-square::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.15));
+}
+
+/* Custom Scrollbar for dropdowns */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9; 
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1; 
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; 
+}
+
+    </style>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body class="antialiased">
+
+
+<!-- Top Utility Bar -->
+<div class="bg-slate-900 text-white py-2 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row
+                justify-between items-center gap-3">
+
+        <!-- Left: Language Switcher -->
+        <div class="flex items-center gap-2 text-sm">
+            <i class="fa-solid fa-globe text-amber-400"></i>
+            <label for="language" class="sr-only">Language</label>
+            <select id="language"
+                    class="bg-slate-800 text-white text-sm
+                           border border-slate-700 rounded-md
+                           px-2 py-1 focus:outline-none
+                           focus:ring-1 focus:ring-amber-500">
+                <option value="en" selected>English</option>
+                <!-- <option value="hi">हिंदी</option> -->
+            </select>
+        </div>
+
+        <!-- Right: Social Links -->
+<div class="flex items-center gap-5 text-base">
+    <a href="https://www.facebook.com/iithyderabad/" target="_blank" class="hover:text-amber-400" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <a href="https://twitter.com/IITHyderabad" target="_blank" class="hover:text-amber-400" aria-label="Twitter">
+        <i class="fa-brands fa-twitter"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/school/iithyderabad/" target="_blank" class="hover:text-amber-400" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+
+    <a href="https://www.instagram.com/iithyderabad/" target="_blank"  class="hover:text-amber-400" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <a href="https://www.youtube.com/c/IITHyderabadofficial" target="_blank" class="hover:text-amber-400" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+</div>
+
+
+
+    </div>
+</div>
+
+
+
+
+    <!-- Main Header -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-40 shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                <a href="#" class="flex items-center space-x-2">
+                    <!-- Logo Image -->
+                    <img src="https://iith.ac.in/assets/images/horzlogolong.png" alt="University Logo" class="h-10 w-auto">
+                </a>
+                </div>
+                <div class="hidden md:block">
+
+<div class="ml-0 lg:ml-1 xl:ml-8 flex items-center space-x-1 lg:space-x-1.5 xl:space-x-5 text-xs lg:text-[13px] xl:text-base tracking-tighter xl:tracking-normal">
+
+    <!-- Home -->
+    <a href="/" class="nav-link text-gray-700 hover:text-amber-600 font-medium">
+        Home
+    </a>
+
+    <!-- About Dropdown -->
+    <div class="relative group">
+        <button class="nav-link text-gray-700 hover:text-amber-600 font-medium flex items-center gap-1">
+            Academics
+            <svg class="w-4 h-4 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+        <div class="absolute left-0 mt-2 w-56 bg-white shadow-xl rounded-lg
+                    opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                    transition-all duration-200 z-50">
+            
+                
+                    <a href="/academics/index.html#admissions" class="block px-5 py-3 hover:bg-amber-50 ">Admissions</a>
+                
+            
+                
+                    <a href="/academics/programmes-offered/" class="block px-5 py-3 hover:bg-amber-50 ">Programs</a>
+                
+            
+                
+                    <a href="/academics/departments/" class="block px-5 py-3 hover:bg-amber-50 ">Departments</a>
+                
+            
+                
+                    <a href="/academics/calendars-timetables/" class="block px-5 py-3 hover:bg-amber-50 ">Calendars & Timetables</a>
+                
+            
+                
+                    <a href="https://ocs.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Office of Career Services</a>
+                
+            
+                
+                    <a href="https://cce.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Centre for Continuing Education</a>
+                
+            
+            <a href="/academics/index.html" class="block px-5 py-3 hover:bg-amber-50">Office of Academic Affairs</a>
+        </div>
+    </div>
+
+    <!-- Academics Dropdown -->
+    <div class="relative group">
+        <button class="nav-link text-gray-700 hover:text-amber-600 font-medium flex items-center gap-1">
+            Research
+            <svg class="w-4 h-4 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+        <div class="absolute left-0 mt-2 w-64 bg-white shadow-xl rounded-lg
+                    opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                    transition-all duration-200 z-50">
+            
+                
+                    <a href="https://scicomm.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Science Communication</a>
+                
+            
+                
+                    <a href="https://raiith.krc.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Research & Publications</a>
+                
+            
+                
+                    <a href="/working-papers/" class="block px-5 py-3 hover:bg-amber-50 ">Working Papers</a>
+                
+            
+                
+                    <a href="/research-centres/" class="block px-5 py-3 hover:bg-amber-50 ">Research Centres</a>
+                
+            
+                
+                    <a href="https://itic.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Incubation Center</a>
+                
+            
+                
+                    <a href="https://innovationcouncil.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Institute Innovation Council</a>
+                
+            
+            <a href="https://research.iith.ac.in/research-infrastracture" class="block px-5 py-3 hover:bg-amber-50">Research Facilities</a>
+            <a href="https://research.iith.ac.in/" class="block px-5 py-3 hover:bg-amber-50">Office of SRC</a>
+        </div>
+    </div>
+
+    <!-- Research Dropdown -->
+    <div class="relative group">
+        <button class="nav-link text-gray-700 hover:text-amber-600 font-medium flex items-center gap-1">
+            Relations
+            <svg class="w-4 h-4 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+        <div class="absolute left-0 mt-2 w-64 bg-white shadow-xl rounded-lg
+                    opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                    transition-all duration-200 z-50">
+                    
+                        
+                            <a href="https://pr.iith.ac.in/press-release" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Press Releases</a>
+                        
+                    
+                        
+                            <a href="https://pr.iith.ac.in/newsletter/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Newsletter</a>
+                        
+                    
+                        
+                            <a href="/japandesk/" class="block px-5 py-3 hover:bg-amber-50 ">JICA Friendship Program</a>
+                        
+                    
+            <a href="https://pr.iith.ac.in/" class="block px-5 py-3 hover:bg-amber-50">Public Relations</a>
+            <a href="https://acr.iith.ac.in/" class="block px-5 py-3 hover:bg-amber-50">Alumni and Corporate Relations</a>
+            <a href="https://ir.iith.ac.in/" class="block px-5 py-3 hover:bg-amber-50">International Relations</a>
+        </div>
+    </div>
+
+    <!-- About Dropdown -->
+    <div class="relative group">
+        <button class="nav-link text-gray-700 hover:text-amber-600 font-medium flex items-center gap-1">
+            About
+            <svg class="w-4 h-4 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+        <div class="absolute left-0 mt-2 w-64 bg-white shadow-xl rounded-lg
+                    opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                    transition-all duration-200 z-50">
+                    
+                        
+                            <a href="/about/aboutiith/" class="block px-5 py-3 hover:bg-amber-50 ">About IITH</a>
+                        
+                    
+                        
+                            <a href="https://online.fliphtml5.com/vrhdl/ljbd/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">IITH Brochure</a>
+                        
+                    
+                        
+                            <a href="/about/aboutiith/#BoG" class="block px-5 py-3 hover:bg-amber-50 ">Board of Governors</a>
+                        
+                    
+                        
+                            <a href="/about/aboutiith/#senate" class="block px-5 py-3 hover:bg-amber-50 ">Senate</a>
+                        
+                    
+                        
+                            <a href="/people/administration/" class="block px-5 py-3 hover:bg-amber-50 ">Governance</a>
+                        
+                    
+                        
+                            <a href="/reports/" class="block px-5 py-3 hover:bg-amber-50 ">Rankings & Reports</a>
+                        
+                    
+                        
+                            <a href="https://sustainability.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Sustainability</a>
+                        
+                    
+                        
+                            <a href="/about/iith_policies/" class="block px-5 py-3 hover:bg-amber-50 ">IITH Policies</a>
+                        
+                    
+        </div>
+    </div>
+
+    <!-- People Dropdown -->
+    <div class="relative group">
+        <button class="nav-link text-gray-700 hover:text-amber-600 font-medium flex items-center gap-1">
+            People
+            <svg class="w-4 h-4 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+        <div class="absolute left-0 mt-2 w-64 bg-white shadow-xl rounded-lg
+                    opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                    transition-all duration-200 z-50">
+                    
+                        
+                            <a href="/people/faculty" class="block px-5 py-3 hover:bg-amber-50 ">Faculty</a>
+                        
+                    
+                        
+                            <a href="/people/staff" class="block px-5 py-3 hover:bg-amber-50 ">Staff</a>
+                        
+                    
+                        
+                            <a href="https://www.gymkhana.iith.ac.in" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Students</a>
+                        
+                    
+            <a href="/about/directory/" class="block px-5 py-3 hover:bg-amber-50">Directory</a>
+        </div>
+    </div>
+
+    <!-- Administration Dropdown -->
+    <div class="relative group">
+        <button class="nav-link text-gray-700 hover:text-amber-600 font-medium flex items-center gap-1">
+            Administration
+            <svg class="w-4 h-4 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+        <div class="absolute left-0 mt-2 w-64 bg-white shadow-xl rounded-lg
+                    opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                    transition-all duration-200 z-50 max-h-96 overflow-y-auto overflow-x-hidden custom-scrollbar">
+                    
+                        
+                            <a href="/director/" class="block px-5 py-3 hover:bg-amber-50 ">Director</a>
+                        
+                    
+                        
+                            <a href="/registrar/" class="block px-5 py-3 hover:bg-amber-50 ">Registrar</a>
+                        
+                    
+                        
+                            <a href="https://iith.ac.in/academics/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Academic Office</a>
+                        
+                    
+                        
+                            <a href="https://accounts.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Finance & Accounts Section</a>
+                        
+                    
+                        
+                            <a href="https://iith.ac.in/hr_department_staff/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">HR Department (Staff)</a>
+                        
+                    
+                        
+                            <a href="https://iith.ac.in/dofa/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Dean of Faculty Affairs office</a>
+                        
+                    
+                        
+                            <a href="https://iith.ac.in/dtx/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Office of Digital Transformation</a>
+                        
+                    
+                        
+                            <a href="https://research.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Office of SRC</a>
+                        
+                    
+                        
+                            <a href="https://iith.ac.in/stores_purchase/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Stores & Purchase</a>
+                        
+                    
+                        
+                            <a href="https://dost.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Dean (Students) Office</a>
+                        
+                    
+                        
+                            <a href="https://cmd.iith.ac.in/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Construction and Maintenance Division</a>
+                        
+                    
+                        
+                            <a href="https://iith.ac.in/coordination_section/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Coordination Section</a>
+                        
+                    
+                        
+                            <a href="https://iith.ac.in/registrar_office/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">Office of the Registrar</a>
+                        
+                    
+                        
+                            <a href="https://iith.ac.in/ms_section/" target="_blank" class="block px-5 py-3 hover:bg-amber-50 ">MS Section</a>
+                        
+                    
+        </div>
+    </div>
+
+    <!-- Events -->
+    <a href="/careers" class="nav-link text-gray-700 hover:text-amber-600 font-medium">
+        Careers
+    </a>
+
+<a href="https://giving.iith.ac.in/how-to-give"
+   class="inline-flex items-center justify-center
+          h-7 lg:h-8 xl:h-9 min-w-[60px] lg:min-w-[72px] xl:min-w-[96px]
+          px-2 lg:px-3 xl:px-4 rounded-full
+          bg-amber-600 text-white text-[11px] lg:text-xs xl:text-sm font-semibold
+          hover:bg-amber-700
+          shadow-sm hover:shadow-md
+          transition-all duration-300">
+    Donate
+</a>
+
+<a href="/visit"
+   class="inline-flex items-center justify-center
+          h-7 lg:h-8 xl:h-9 min-w-[60px] lg:min-w-[72px] xl:min-w-[96px]
+          px-2 lg:px-3 xl:px-4 rounded-full
+          bg-amber-600 text-white text-[11px] lg:text-xs xl:text-sm font-semibold
+          hover:bg-amber-700
+          shadow-sm hover:shadow-md
+          transition-all duration-300">
+    Visit IITH
+</a>
+<a href="/search/"
+   aria-label="Search"
+   class="inline-flex items-center justify-center
+          h-7 w-7 lg:h-8 lg:w-8 xl:h-10 xl:w-10 rounded-full
+          text-gray-700 hover:text-amber-600
+          hover:bg-amber-50
+          transition-all duration-300">
+    <i class="fa-solid fa-magnifying-glass text-sm lg:text-base xl:text-lg"></i>
+</a>
+
+
+
+
+</div>
+
+                </div>
+                <div class="flex items-center">
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500" aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="block h-6 w-6" id="menu-open-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                            <svg class="hidden h-6 w-6" id="menu-close-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="md:hidden hidden max-h-[calc(100vh-5rem)] overflow-y-auto custom-scrollbar" id="mobile-menu">
+<div class="px-2 pt-3 pb-4 space-y-1 sm:px-3 text-slate-800">
+
+    <!-- Home -->
+    <a href="/" class="block px-3 py-2 text-base font-semibold">
+        Home
+    </a>
+
+    <!-- Academics -->
+    <button class="w-full flex justify-between items-center px-3 py-2 text-base font-semibold"
+            onclick="toggleDropdown('academics-mobile')">
+        Academics
+        <span>+</span>
+    </button>
+    <div id="academics-mobile" class="hidden pl-6 text-sm">
+        
+            
+                <a href="/academics/index.html#admissions" class="block py-2 ">Admissions</a>
+            
+        
+            
+                <a href="/academics/programmes-offered/" class="block py-2 ">Programs</a>
+            
+        
+            
+                <a href="/academics/departments/" class="block py-2 ">Departments</a>
+            
+        
+            
+                <a href="/academics/calendars-timetables/" class="block py-2 ">Calendars & Timetables</a>
+            
+        
+            
+                <a href="https://ocs.iith.ac.in/" target="_blank" class="block py-2 ">Office of Career Services</a>
+            
+        
+            
+                <a href="https://cce.iith.ac.in/" target="_blank" class="block py-2 ">Centre for Continuing Education</a>
+            
+        
+        <a href="/academics/index.html" class="block py-2">Office of Academic Affairs</a>
+    </div>
+
+    <!-- Research -->
+    <button class="w-full flex justify-between items-center px-3 py-2 text-base font-semibold"
+            onclick="toggleDropdown('research-mobile')">
+        Research
+        <span>+</span>
+    </button>
+    <div id="research-mobile" class="hidden pl-6 text-sm">
+        
+            
+                <a href="https://scicomm.iith.ac.in/" target="_blank" class="block py-2 ">Science Communication</a>
+            
+        
+            
+                <a href="https://raiith.krc.iith.ac.in/" target="_blank" class="block py-2 ">Research & Publications</a>
+            
+        
+            
+                <a href="/working-papers/" class="block py-2 ">Working Papers</a>
+            
+        
+            
+                <a href="/research-centres/" class="block py-2 ">Research Centres</a>
+            
+        
+            
+                <a href="https://itic.iith.ac.in/" target="_blank" class="block py-2 ">Incubation Center</a>
+            
+        
+            
+                <a href="https://innovationcouncil.iith.ac.in/" target="_blank" class="block py-2 ">Institute Innovation Council</a>
+            
+        
+        <a href="https://research.iith.ac.in/research-infrastracture" class="block py-2">Research Facilities</a>
+        <a href="https://research.iith.ac.in/" class="block py-2">Office of SRC</a>
+    </div>
+
+    <!-- Relations -->
+    <button class="w-full flex justify-between items-center px-3 py-2 text-base font-semibold"
+            onclick="toggleDropdown('relations-mobile')">
+        Relations
+        <span>+</span>
+    </button>
+    <div id="relations-mobile" class="hidden pl-6 text-sm">
+        
+            
+                <a href="https://pr.iith.ac.in/press-release" target="_blank" class="block py-2 ">Press Releases</a>
+            
+        
+            
+                <a href="https://pr.iith.ac.in/newsletter/" target="_blank" class="block py-2 ">Newsletter</a>
+            
+        
+            
+                <a href="/japandesk/" class="block py-2 ">JICA Friendship Program</a>
+            
+        
+        <a href="https://pr.iith.ac.in/" class="block py-2">Public Relations</a>
+        <a href="https://acr.iith.ac.in/" class="block py-2">Alumni & Corporate Relations</a>
+        <a href="https://ir.iith.ac.in/" class="block py-2">International Relations</a>
+    </div>
+
+    <!-- About -->
+    <button class="w-full flex justify-between items-center px-3 py-2 text-base font-semibold"
+            onclick="toggleDropdown('about-mobile')">
+        About
+        <span>+</span>
+    </button>
+    <div id="about-mobile" class="hidden pl-6 text-sm">
+        
+            
+                <a href="/about/aboutiith/" class="block py-2 ">About IITH</a>
+            
+        
+            
+                <a href="https://online.fliphtml5.com/vrhdl/ljbd/" target="_blank" class="block py-2 ">IITH Brochure</a>
+            
+        
+            
+                <a href="/about/aboutiith/#BoG" class="block py-2 ">Board of Governors</a>
+            
+        
+            
+                <a href="/about/aboutiith/#senate" class="block py-2 ">Senate</a>
+            
+        
+            
+                <a href="/people/administration/" class="block py-2 ">Governance</a>
+            
+        
+            
+                <a href="/reports/" class="block py-2 ">Rankings & Reports</a>
+            
+        
+            
+                <a href="https://sustainability.iith.ac.in/" target="_blank" class="block py-2 ">Sustainability</a>
+            
+        
+            
+                <a href="/about/iith_policies/" class="block py-2 ">IITH Policies</a>
+            
+        
+    </div>
+
+    <!-- People -->
+    <button class="w-full flex justify-between items-center px-3 py-2 text-base font-semibold"
+            onclick="toggleDropdown('people-mobile')">
+        People
+        <span>+</span>
+    </button>
+    <div id="people-mobile" class="hidden pl-6 text-sm">
+        
+            
+                <a href="/people/faculty" class="block py-2 ">Faculty</a>
+            
+        
+            
+                <a href="/people/staff" class="block py-2 ">Staff</a>
+            
+        
+            
+                <a href="https://www.gymkhana.iith.ac.in" target="_blank" class="block py-2 ">Students</a>
+            
+        
+        <a href="/about/directory/" class="block py-2">Directory</a>
+    </div>
+
+    <!-- Administration -->
+    <button class="w-full flex justify-between items-center px-3 py-2 text-base font-semibold"
+            onclick="toggleDropdown('admin-mobile')">
+        Administration
+        <span>+</span>
+    </button>
+    <div id="admin-mobile" class="hidden pl-6 text-sm max-h-64 overflow-y-auto custom-scrollbar">
+        
+            
+                <a href="/director/" class="block py-2 ">Director</a>
+            
+        
+            
+                <a href="/registrar/" class="block py-2 ">Registrar</a>
+            
+        
+            
+                <a href="https://iith.ac.in/academics/" target="_blank" class="block py-2 ">Academic Office</a>
+            
+        
+            
+                <a href="https://accounts.iith.ac.in/" target="_blank" class="block py-2 ">Finance & Accounts Section</a>
+            
+        
+            
+                <a href="https://iith.ac.in/hr_department_staff/" target="_blank" class="block py-2 ">HR Department (Staff)</a>
+            
+        
+            
+                <a href="https://iith.ac.in/dofa/" target="_blank" class="block py-2 ">Dean of Faculty Affairs office</a>
+            
+        
+            
+                <a href="https://iith.ac.in/dtx/" target="_blank" class="block py-2 ">Office of Digital Transformation</a>
+            
+        
+            
+                <a href="https://research.iith.ac.in/" target="_blank" class="block py-2 ">Office of SRC</a>
+            
+        
+            
+                <a href="https://iith.ac.in/stores_purchase/" target="_blank" class="block py-2 ">Stores & Purchase</a>
+            
+        
+            
+                <a href="https://dost.iith.ac.in/" target="_blank" class="block py-2 ">Dean (Students) Office</a>
+            
+        
+            
+                <a href="https://cmd.iith.ac.in/" target="_blank" class="block py-2 ">Construction and Maintenance Division</a>
+            
+        
+            
+                <a href="https://iith.ac.in/coordination_section/" target="_blank" class="block py-2 ">Coordination Section</a>
+            
+        
+            
+                <a href="https://iith.ac.in/registrar_office/" target="_blank" class="block py-2 ">Office of the Registrar</a>
+            
+        
+            
+                <a href="https://iith.ac.in/ms_section/" target="_blank" class="block py-2 ">MS Section</a>
+            
+        
+    </div>
+
+    <!-- Careers -->
+    <a href="/careers/" class="block px-3 py-2 text-base font-semibold">
+        Careers
+    </a>
+
+    <!-- Donate -->
+    <a href="https://giving.iith.ac.in/open-contribute" class="block px-3 py-2 text-base font-semibold text-amber-700">
+        Donate to IITH
+    </a>
+    <!-- Visit -->
+    <a href="/visit/" class="block px-3 py-2 text-base font-semibold text-amber-700">
+        Visit IITH
+    </a>
+
+    <a href="https://iith.ac.in/search/"
+   class="flex items-center gap-2 px-3 py-2 text-base font-semibold">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    Search
+</a>
+</div>
+
+
+        </div>
+    </header>
+
+    <main>
+
+<section class="bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex flex-col items-center text-center">
+
+            <div class="w-16 h-1 bg-amber-600 rounded-full mb-4"></div>
+
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+                Indian Institute of Technology Hyderabad (IITH)
+            </h1>
+
+            <p class="mt-2 text-lg sm:text-xl md:text-2xl font-semibold tracking-wide text-amber-700">
+                 Inventing and Innovating in Technology for Humanity (IITH)
+            </p>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+        <section class="relative w-full overflow-hidden">
+            <div id="hero-carousel" class="carousel-container">
+                <div class="carousel-track">
+                    
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/iith-motivation.png" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/iith_event_feb_2026.jpg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/mou-022-2026.jpg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/voters-pledge-slider-1.jpg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/voters-pledge-slider-2.jpg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/annual_book_fair-slider.jpg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/eml_talk-slider.jpg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="/japandesk/" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/IITH-JAPAN.jpeg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/simbio-slider.jpg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/simbio2-slider.jpg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/ai6-slider.jpeg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="carousel-slide hero-carousel-slide">
+                            <a href="" target="_blank" class="block w-full h-full">
+                                <img src="/assets/images/slider/ngen-post-office-2-slider.jpg" alt="University Campus" class="w-full object-cover">
+                            </a>
+                        </div>
+                </div>
+                <button id="hero-carousel-prev" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/50 hover:bg-white text-slate-800 p-3 rounded-full shadow-md transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button id="hero-carousel-next" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/50 hover:bg-white text-slate-800 p-3 rounded-full shadow-md transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+        </section>
+
+<section id="announcements" class="bg-amber-50 border-b border-amber-200 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+
+        <div class="flex items-center gap-4">
+
+            <span class="shrink-0 inline-flex items-center px-4 py-1
+                         text-sm font-semibold text-white
+                         bg-amber-600 rounded-full">
+                Announcements
+            </span>
+
+            <div class="relative flex-1 overflow-hidden">
+
+                <div class="pointer-events-none absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-amber-50 to-transparent z-10"></div>
+                <div class="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-amber-50 to-transparent z-10"></div>
+
+                <div class="announcement-track flex items-center gap-10 whitespace-nowrap">
+
+                    <a href="https://iith.ac.in/pgadmissions/" target="_blank"
+                       class="announcement-item flex items-center gap-2
+                              text-slate-800 font-medium
+                              hover:text-amber-700 transition">
+                        <span class="text-amber-600">●</span>
+                        Applications open for MTech in Data Science
+                    </a>
+
+                    <a href="\assets\files\pdf\dear-btech-bdes-students-2026-batch.pdf" target="_blank"
+                       class="announcement-item flex items-center gap-2
+                              text-slate-800 font-medium
+                              hover:text-amber-700 transition">
+                        <span class="text-amber-600">●</span>
+                        Welcome to BTech & BDes Students of 2026 Batch
+                    </a>
+
+                    <!-- <a href="https://iith.ac.in/pgadmissions/" target="_blank"
+                       class="announcement-item flex items-center gap-2
+                              text-slate-800 font-medium
+                              hover:text-amber-700 transition">
+                        <span class="text-amber-600">●</span>
+                        MTech Critical Minerals & Defence Technologies Admissions 2026
+                    </a> -->
+
+                     <a href="https://docs.google.com/document/d/e/2PACX-1vS9HWMpOzxMN5fDWD1EYNjZD7vcKrhrylH8IT_oX7RIpb2o9qvE-1IZuc1vMWIyEA/pub" target="_blank"
+                       class="announcement-item flex items-center gap-2
+                              text-slate-800 font-medium
+                              hover:text-amber-700 transition">
+                        <span class="text-amber-600">●</span>
+                        PG Admission FAQs 2026
+                    </a>
+
+                    <!-- <a href="https://iith.ac.in/pgadmissions/" target="_blank"
+                       class="announcement-item flex items-center gap-2
+                              text-slate-800 font-medium
+                              hover:text-amber-700 transition">
+                        <span class="text-amber-600">●</span>
+                        PG Admissions for July 2026 is open now
+                    </a> -->
+
+                    <a href="/tenders/"
+                       class="announcement-item flex items-center gap-2
+                              text-slate-800 font-medium
+                              hover:text-amber-700 transition">
+                        <span class="text-amber-600">●</span>
+                        Tenders & Notices
+                    </a>
+
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+        <!-- Events Section -->
+        <section id="events" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <span class="inline-flex items-center mb-6 px-6 py-3
+             text-lg font-bold tracking-wide
+             text-amber-900 bg-amber-200
+             rounded-full shadow-sm">
+                What's Happening at IITH
+            </span>
+            <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 pb-10">
+            <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
+                Upcoming Events
+            </h2>
+        </div>
+    </div>
+                       
+    <!-- 15TH CONVOCATION MOTION LOGO SECTION START -->
+    <!-- <section id="convocation-motion-section" class="relative w-full bg-slate-900 border-y border-slate-800 overflow-hidden mt-10" style="min-height: 400px; padding: 3rem 0; display: flex; justify-content: center; align-items: center;">
+                
+                <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+Devanagari:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+                <style>
+                    #convocation-motion-section {
+                        --primary-orange: #FF8C00;
+                        --primary-orange-light: #FFA500;
+                        --primary-orange-lighter: #FFD700;
+                        --text-main: #ffffff;
+                        --shadow-color: rgba(0, 0, 0, 0.5);
+                    }
+
+                    #convocation-motion-section .conv-logo-container {
+                        text-align: center;
+                        position: relative;
+                        padding: clamp(0.5rem, 2vw, 1rem); /* Reduced padding */
+                        z-index: 10;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 100%;
+                        max-width: 95vw;
+                    }
+
+                #convocation-motion-section .conv-zoom-pulse {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                    transform-style: preserve-3d;
+                    animation: convContinuousZoom 4s ease-in-out infinite 2s;
+                }
+
+                    #convocation-motion-section .conv-number-group {
+                        position: relative;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: center;
+                        margin-bottom: clamp(0.2rem, 1vw, 0.4rem); /* Reduced margin */
+                        animation: convRevealUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                        animation-delay: 0.2s;
+                        opacity: 0;
+                    }
+
+                    #convocation-motion-section .conv-number-main {
+                        font-size: clamp(6rem, 20vw, 8rem);
+                        line-height: 1;
+                        font-family: 'Cinzel Decorative', serif;
+                        font-weight: 700;
+                        color: var(--text-main);
+                        letter-spacing: -1px;
+                        background: linear-gradient(to right, var(--primary-orange) 20%, #d35400 40%, var(--primary-orange) 60%, #d35400 80%);
+                        background-size: 200% auto;
+                        color: transparent;
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        animation: convShimmer 5s linear infinite;
+                        filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2));
+                        transform-origin: center bottom;
+                    }
+
+                    #convocation-motion-section .conv-number-pattern {
+                        position: absolute;
+                        top: 0; left: 0; right: 0; bottom: 0;
+                        mix-blend-mode: color-burn;
+                        opacity: 0.5;
+                        background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10c2.5-2.5 7.5-2.5 7.5 2.5s-5 7.5-7.5 7.5-7.5-2.5-7.5-7.5 5-5 7.5-2.5z' fill='%23ffffff' fill-opacity='0.6' fill-rule='evenodd'/%3E%3C/svg%3E");
+                        -webkit-background-clip: text;
+                        color: transparent;
+                        pointer-events: none;
+                    }
+
+                    #convocation-motion-section .conv-ordinal-group {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        margin-top: clamp(0.2rem, 1.2vw, 0.5rem); /* Reduced margins */
+                        margin-left: clamp(0.1rem, 0.5vw, 0.2rem); /* Reduced margins */
+                        opacity: 0;
+                        animation: convFadeInScale 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                        animation-delay: 1.2s;
+                    }
+
+                    #convocation-motion-section .conv-ordinal-hi {
+                        font-family: 'Noto Serif Devanagari', serif;
+                        font-size: clamp(0.5rem, 1.8vw, 0.75rem); /* Reduced size */
+                        color: var(--text-main);
+                        line-height: 1;
+                        text-shadow: 1px 1px 2px var(--shadow-color);
+                    }
+
+                    #convocation-motion-section .conv-ordinal-en {
+                        font-family: 'Cinzel', serif;
+                        font-size: clamp(0.45rem, 1.5vw, 0.6rem); /* Reduced size */
+                        font-weight: 600;
+                        color: var(--text-main);
+                        line-height: 1;
+                        margin-top: -1px;
+                        text-shadow: 1px 1px 2px var(--shadow-color);
+                    }
+
+                    #convocation-motion-section .conv-text-hi {
+                        font-family: 'Noto Serif Devanagari', serif;
+                        font-size: clamp(0.75rem, 3vw, 1.1rem); /* Reduced size */
+                        font-weight: 600;
+                        color: var(--text-main);
+                        letter-spacing: 1px;
+                        text-align: center;
+                        opacity: 0;
+                        animation: convRevealUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                        animation-delay: 0.8s;
+                        text-shadow: 1px 1px 3px var(--shadow-color);
+                    }
+
+                    #convocation-motion-section .conv-text-en {
+                        font-family: 'Playfair Display', serif;
+                        font-size: clamp(0.6rem, 2.5vw, 1rem); /* Reduced size */
+                        font-weight: 700;
+                        color: var(--text-main);
+                        letter-spacing: clamp(0.5px, 0.2vw, 1.5px);
+                        text-transform: uppercase;
+                        text-align: center;
+                        opacity: 0;
+                        animation: convRevealUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                        animation-delay: 1s;
+                        text-shadow: 1px 1px 3px var(--shadow-color);
+                    }
+
+                    #convocation-motion-section .conv-divider {
+                        width: 0%;
+                        height: 2px;
+                        background: linear-gradient(90deg, transparent, var(--primary-orange), transparent);
+                        margin: clamp(0.3rem, 1vw, 0.5rem) 0; /* Reduced margin */
+                        opacity: 0;
+                        animation: convExpandWidth 1.5s ease-out forwards;
+                        animation-delay: 1.4s;
+                    }
+
+                    #convocation-motion-section .conv-date-text {
+                        font-family: 'Inter', sans-serif;
+                        font-size: clamp(0.55rem, 1.5vw, 0.7rem); /* Reduced size */
+                        color: var(--text-main);
+                        letter-spacing: 1px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-wrap: wrap;
+                        gap: clamp(0.2rem, 1vw, 0.4rem); /* Reduced gap */
+                        opacity: 0;
+                        animation: convFadeInScale 1s ease-out forwards;
+                        animation-delay: 1.6s;
+                        text-align: center;
+                    }
+
+                    #convocation-particles-js {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        top: 0; left: 0;
+                        z-index: 1;
+                        pointer-events: none;
+                    }
+
+                    .conv-sparkle {
+                        position: absolute;
+                        width: 24px;
+                        height: 24px;
+                        background: radial-gradient(circle, #FFD700 10%, transparent 60%);
+                        border-radius: 50%;
+                        opacity: 0;
+                        transform: scale(0);
+                        pointer-events: none;
+                        z-index: 20;
+                    }
+
+                    /* Scoped Keyframes */
+                    @keyframes convShimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+                    @keyframes convRevealUp { 0% { opacity: 0; transform: translateY(15px) scale(0.95); filter: blur(3px); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+                    @keyframes convFadeInScale { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+                    @keyframes convExpandWidth { 0% { width: 0%; opacity: 0; } 100% { width: 100%; max-width: 320px; opacity: 1; } }
+                    @keyframes convPopSparkle { 0% { opacity: 0; transform: scale(0) rotate(0deg); } 50% { opacity: 1; transform: scale(1.5) rotate(45deg); } 100% { opacity: 0; transform: scale(0) rotate(90deg); } }
+                @keyframes convContinuousZoom { 0%, 75%, 100% { transform: scale(1); } 87.5% { transform: scale(1.05); } }
+                </style>
+
+                <div id="convocation-particles-js"></div>
+
+                <div class="conv-logo-container group" id="conv-main-container">
+                    
+                    <div class="conv-number-group" id="conv-number-group">
+                        <div class="conv-number-main" style="position: relative;">
+                            15
+                            <div class="conv-number-pattern">15</div>
+                        </div>
+                        
+                        <div class="conv-ordinal-group">
+                            <span class="conv-ordinal-hi">वां</span>
+                            <span class="conv-ordinal-en">th</span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: clamp(0.1rem, 0.5vw, 0.2rem); position: relative; width: 100%;">
+                        <div class="conv-text-hi">दीक्षांत समारोह</div>
+                        <div class="conv-text-en">Convocation</div>
+                    </div>
+
+                    <div class="conv-divider"></div>
+
+                    <div class="conv-date-text">
+                        <span style="font-family: 'Noto Serif Devanagari', serif; font-weight: 600; font-size: calc(100% + 2px);">18 जुलाई, 2026</span>
+                        <div style="width: 4px; height: 4px; background-color: var(--primary-orange-light); border-radius: 50%; box-shadow: 0 0 3px var(--primary-orange-lighter);"></div>
+                        <span style="font-weight: 600;">18 JULY, 2026</span>
+                    </div>
+                </div> -->
+
+                <!-- Scripts scoped safely for the section -->
+                <!-- <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        // 1. Initialize Particles limited to this container
+                        if (typeof particlesJS !== 'undefined') {
+                            particlesJS("convocation-particles-js", {
+                                "particles": {
+                                    "number": { "value": 150, "density": { "enable": true, "value_area": 800 } },
+                                    "color": { "value": "#FFA500" },
+                                    "shape": { "type": "circle" },
+                                    "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                                    "size": { "value": 2, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false } },
+                                    "line_linked": { "enable": false },
+                                    "move": { "enable": true, "speed": 1, "direction": "top", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+                                },
+                                "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": true, "mode": "repulse" }, "resize": true }, "modes": { "bubble": { "distance": 250, "size": 0, "duration": 2, "opacity": 0, "speed": 3 }, "repulse": { "distance": 400, "duration": 0.4 } } },
+                                "retina_detect": true
+                            });
+                        }
+
+                        // 2. Safely scoped 3D parallax effect
+                        const section = document.getElementById('convocation-motion-section');
+                        const container = document.getElementById('conv-main-container');
+                        const numberGroup = document.getElementById('conv-number-group');
+
+                        section.addEventListener('mousemove', (e) => {
+                            const rect = section.getBoundingClientRect();
+                            const centerX = rect.left + rect.width / 2;
+                            const centerY = rect.top + rect.height / 2;
+                            
+                            const xAxis = (centerX - e.clientX) / 70; /* Reduced rotation sensitivity */
+                            const yAxis = (centerY - e.clientY) / 70;
+                            
+                            container.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                            numberGroup.style.transform = `translateZ(15px) translateY(${-yAxis * 1.5}px) translateX(${-xAxis * 1.5}px)`; /* Reduced parallax */
+                        });
+
+                        section.addEventListener('mouseleave', () => {
+                            container.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+                            numberGroup.style.transform = `translateZ(0px) translateY(0px) translateX(0px)`;
+                            
+                            container.style.transition = "transform 0.5s ease";
+                            numberGroup.style.transition = "transform 0.5s ease";
+                            setTimeout(() => { container.style.transition = "none"; numberGroup.style.transition = "none"; }, 500);
+                        });
+
+                        // 3. Ambient Sparkles scoped to the section
+                        function createSparkle() {
+                            const sparkle = document.createElement('div');
+                            sparkle.classList.add('conv-sparkle');
+                            
+                            const randomX = Math.random() * 100;
+                            const randomY = Math.random() * 100;
+                            
+                            sparkle.style.left = `${randomX}%`;
+                            sparkle.style.top = `${randomY}%`;
+                            
+                            const duration = 1 + Math.random();
+                            sparkle.style.animation = `convPopSparkle ${duration}s ease-in-out forwards`;
+                            
+                            section.appendChild(sparkle);
+                            setTimeout(() => sparkle.remove(), duration * 1000);
+                        }
+
+                        setTimeout(() => { setInterval(createSparkle, 1200); }, 2000);
+                    });
+                </script>
+    </section> -->
+    <!-- 15TH CONVOCATION MOTION LOGO SECTION END   -->
+
+    <!-- Convocation FAQs Button Section -->
+    <!-- <div class="bg-white pt-8 pb-16 flex justify-center items-center gap-4 flex-wrap">
+        <a href="/assets/files/pdf/IITH-15th_Convocation_2026_Invitation.pdf"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-block relative px-6 py-3 text-base font-semibold text-white
+                  bg-amber-600 rounded-full shadow-lg
+                  overflow-hidden group
+                  transition-all duration-300 ease-in-out
+                  hover:shadow-2xl hover:scale-105">
+            <span class="relative z-10">
+                Convocation Invitation
+            </span>
+        </a>
+        <a href="https://docs.google.com/document/d/11Bn16075lVmiG1Ax3zgtJO-ZGTSRS12R/edit?usp=sharing&ouid=101613444636699668516&rtpof=true&sd=true"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-block relative px-6 py-3 text-base font-semibold text-white
+                  bg-amber-600 rounded-full shadow-lg
+                  overflow-hidden group
+                  transition-all duration-300 ease-in-out
+                  hover:shadow-2xl hover:scale-105">
+            <span class="absolute top-0 left-0 w-full h-full bg-black opacity-0
+                         transition-opacity duration-300 group-hover:opacity-20"></span>
+            <span class="relative z-10">
+                View Convocation FAQs
+            </span>
+        </a>
+        <a href="/assets/files/pdf/IITH_15TH_Convocation_Schedule.pdf"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-block relative px-6 py-3 text-base font-semibold text-white
+                  bg-amber-600 rounded-full shadow-lg
+                  overflow-hidden group
+                  transition-all duration-300 ease-in-out
+                  hover:shadow-2xl hover:scale-105">
+            <span class="relative z-10">
+                View Convocation Schedule
+            </span>
+        </a>
+    </div> -->
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+        <div class="text-center mb-16">
+            <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                Conferences, symposiums, and flagship events that bring innovation,
+                research, and culture together.
+            </p>
+        </div>
+
+        <!-- Featured Event -->
+        <!-- <div class="relative mb-20 rounded-3xl overflow-hidden shadow-2xl group">
+            <img src="/assets/images/innovation_day.png"
+                 alt="Innovation Day Event"
+                 class="w-full h-[420px] object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+            <div class="absolute inset-0 flex items-end p-8 md:p-14">
+                <div class="text-white max-w-2xl">
+                    <h3 class="text-3xl md:text-4xl font-extrabold">
+                        Innovation Day 2026
+                    </h3>
+                    <div class="mt-6 flex items-center gap-6 text-sm text-gray-300">
+                        <span class="flex items-center gap-2">
+                            📅 Jan 03, 2026
+                        </span>
+                    </div>
+
+                    <div class="mt-8 flex gap-4">
+                        <a href="/innovation_day/"
+                           class="inline-flex items-center justify-center px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-full transition">
+                            Learn More →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Other Events Grid -->
+        <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+
+            <!-- <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
+                <div class="relative">
+                    <img src="/assets/images/events/auditorium_cce.jpg"
+                         class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-amber-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        24-26, Jan 2026
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-slate-900">
+                        International Conference on Embryo Culture Systems and Process Control
+                    </h3>
+                    <a href="https://embvisage.com/index.php" class="mt-5 inline-block font-semibold text-amber-600 hover:text-amber-700" target="_blank">
+                        View Details →
+                    </a>
+                </div>
+            </div> -->
+
+            
+            
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        
+
+                            <!-- <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"> -->
+                            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+                                <div class="relative">
+                                    <img src="/assets/images/events/welcomeletter.png"
+                                        alt="Welcome to BTech & BDes Students of 2026 Batch"
+                                        class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <!-- <div class="absolute top-0 left-0 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold"> -->
+                                    <div class="absolute -top-6 left-0 z-20 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+                                        
+                                        
+                                        
+                                            01 Jul 2026 to 27 Jul 2026
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-slate-900 leading-snug">
+                                        Welcome to BTech & BDes Students of 2026 Batch
+                                    </h3>
+                                    
+                                        <a href="/events/2026/07/01/WelcomeLetter/"
+                                        class="mt-5 inline-block font-semibold text-emerald-600 hover:text-emerald-700">
+                                            View Details →
+                                        </a>
+                                    
+                                </div>
+                            </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        
+
+                            <!-- <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"> -->
+                            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+                                <div class="relative">
+                                    <img src="/assets/images/events/ai4se2026.png"
+                                        alt="Join AI4SE 2026 to explore how AI is transforming scientific discovery, healthcare, climate, quantum systems, materials, and education."
+                                        class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <!-- <div class="absolute top-0 left-0 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold"> -->
+                                    <div class="absolute -top-6 left-0 z-20 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+                                        
+                                        
+                                        
+                                            21 Jul 2026 to 23 Jul 2026
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-slate-900 leading-snug">
+                                        Join AI4SE 2026 to explore how AI is transforming scientific discovery, healthcare, climate, quantum systems, materials, and education.
+                                    </h3>
+                                    
+                                        <a href="https://ai4se.iith.ac.in/" target="_blank"
+                                        class="mt-5 inline-block font-semibold text-emerald-600 hover:text-emerald-700">
+                                            View Details →
+                                        </a>
+                                    
+                                </div>
+                            </div>
+                    
+                    
+                    
+                    
+                        
+
+                            <!-- <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"> -->
+                            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+                                <div class="relative">
+                                    <img src="/assets/images/events/nmamld-2026.png"
+                                        alt="International Conference on Nonlocal Mechanics Approaches for Modelling Localized Deformations"
+                                        class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <!-- <div class="absolute top-0 left-0 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold"> -->
+                                    <div class="absolute -top-6 left-0 z-20 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+                                        
+                                        
+                                        
+                                            14 Dec 2026 to 16 Dec 2026
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-slate-900 leading-snug">
+                                        International Conference on Nonlocal Mechanics Approaches for Modelling Localized Deformations
+                                    </h3>
+                                    
+                                        <a href="/events/2026/12/14/nmamld-2026/"
+                                        class="mt-5 inline-block font-semibold text-emerald-600 hover:text-emerald-700">
+                                            View Details →
+                                        </a>
+                                    
+                                </div>
+                            </div>
+                    
+                    
+                    
+                    
+                        
+
+                            <!-- <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"> -->
+                            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+                                <div class="relative">
+                                    <img src="/assets/images/events/sec2026.png"
+                                        alt="15th Structural Engineering Convention (SEC-2026)(An International Conference)"
+                                        class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <!-- <div class="absolute top-0 left-0 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold"> -->
+                                    <div class="absolute -top-6 left-0 z-20 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+                                        
+                                        
+                                        
+                                            20 Dec 2026 to 23 Dec 2026
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-slate-900 leading-snug">
+                                        15th Structural Engineering Convention (SEC-2026)(An International Conference)
+                                    </h3>
+                                    
+                                        <a href="https://civil.iith.ac.in/SEC2026/" target="_blank"
+                                        class="mt-5 inline-block font-semibold text-emerald-600 hover:text-emerald-700">
+                                            View Details →
+                                        </a>
+                                    
+                                </div>
+                            </div>
+                    
+                    
+                    
+                    
+                        
+
+                            <!-- <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"> -->
+                            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+                                <div class="relative">
+                                    <img src="/assets/images/events/ISSC2027.png"
+                                        alt="Indian Structural Steel Conference - 2nd Edition (ISSC 2027)"
+                                        class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <!-- <div class="absolute top-0 left-0 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold"> -->
+                                    <div class="absolute -top-6 left-0 z-20 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+                                        
+                                        
+                                        
+                                            16 Feb 2027 to 19 Feb 2027
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-slate-900 leading-snug">
+                                        Indian Structural Steel Conference - 2nd Edition (ISSC 2027)
+                                    </h3>
+                                    
+                                        <a href="https://issc2027.civil.iith.ac.in/" target="_blank"
+                                        class="mt-5 inline-block font-semibold text-emerald-600 hover:text-emerald-700">
+                                            View Details →
+                                        </a>
+                                    
+                                </div>
+                            </div>
+                    
+        </div>
+
+        <div class="text-center mt-16">
+            <a href="/events/"
+               class="inline-flex items-center px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-full transition">
+                View All Events →
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Media & Outreach -->
+<section id="media" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <div class="text-center mb-14">
+            <span class="inline-flex items-center mb-6 px-6 py-3
+             text-lg font-bold tracking-wide
+             text-amber-900 bg-amber-200
+             rounded-full shadow-sm">
+                Media & Outreach
+            </span>
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-slate-900">
+                Research Activities
+            </h2>
+        </div>
+
+        <!-- Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+
+            <!-- LEFT: YouTube Scrolling List -->
+            <div class="lg:col-span-2">
+
+                <div class="relative overflow-hidden rounded-2xl border bg-slate-50">
+
+                    <div class="youtube-viewport">
+
+                    <!-- Video Track -->
+                        <div class="youtube-track space-y-6 p-6">
+
+                            <!-- Video Item -->
+                            <a href="https://www.youtube.com/watch?v=Zjo0enwcCUU" target="_blank"
+                            class="youtube-card group flex gap-4 items-start bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition">
+                                <img src="/assets/images/first.png"
+                                    class="w-40 h-24 object-cover rounded-lg"
+                                    alt="Video thumbnail">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900 group-hover:text-amber-600">
+                                        India's First 3D Printed Bridge IIT Hyderabad Campus
+                                    </h3>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        Innovating Infrastructure India's First 3D Printed Bridge at IIT Hyderabad.
+                                    </p>
+                                </div>
+                            </a>
+
+                            <a href="https://www.youtube.com/watch?v=Lxw17x6Yh-Q"  target="_blank" class="youtube-card group flex gap-4 items-start bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition">
+                                <img src="/assets/images/second.png"
+                                    class="w-40 h-24 object-cover rounded-lg">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900 group-hover:text-amber-600">
+                                        Preserving India's Cultural Heritage: Inside the Digital Heritage Lab at IIT Hyderabad
+                                    </h3>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        The Digital Heritage Lab at IIT Hyderabad, established six years ago, is at the forefront of preserving India’s cultural heritage through innovative technology.
+                                    </p>
+                                </div>
+                            </a>
+
+                            <a href="https://www.youtube.com/watch?v=WUmNzEEbX6M" target="_blank" class="youtube-card group flex gap-4 items-start bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition">
+                                <img src="/assets/images/third.png"
+                                    class="w-40 h-24 object-cover rounded-lg">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900 group-hover:text-amber-600">
+                                        Powering the Future of Semiconductors 
+                                    </h3>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        IIT Hyderabad is steadily emerging as a hub for semiconductor research and training, with innovations ranging from advanced image sensors to next-generation chips.
+                                    </p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://www.youtube.com/watch?v=Nlf81-xkhME" target="_blank" class="youtube-card group flex gap-4 items-start bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition">
+                                <img src="/assets/images/waste-management.png"
+                                    class="w-40 h-24 object-cover rounded-lg">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900 group-hover:text-amber-600">
+                                        Waste Management Systems at IIT Hyderabad
+                                    </h3>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        Have a look at the Waste Management Systems initiated at IIT Hyderabad
+                                    </p>
+                                </div>
+                            </a>
+
+                            <a href="https://www.youtube.com/watch?v=CQZdR5hnnoQ" target="_blank" class="youtube-card group flex gap-4 items-start bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition">
+                                <img src="/assets/images/gfrp.png"
+                                    class="w-40 h-24 object-cover rounded-lg">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900 group-hover:text-amber-600">
+                                        GFRP Rebar and Discrete FRC System for Improved Durability
+                                    </h3>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        IIT Hyderabad Researchers Propose Use of GFRP Rebar and Discrete Fiber-Based Reinforcing System in Concrete Constructions for Improved Durability.
+                                    </p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://www.youtube.com/watch?v=IuYtglhOtB8" target="_blank" class="youtube-card group flex gap-4 items-start bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition">
+                                <img src="/assets/images/tihan-223.png"
+                                    class="w-40 h-24 object-cover rounded-lg">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900 group-hover:text-amber-600">
+                                        TiHAN IIT Hyderabad Official wheels out driverless ferries & pedals way towards on-call e-bike. 
+                                    </h3>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        IIT Hyderabad Researchers Propose Use of GFRP Rebar and Discrete Fiber-Based Reinforcing System in Concrete Constructions for Improved Durability.
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Vertical Image + Buttons -->
+            <div class="lg:col-span-1">
+
+                <div class="sticky top-28">
+
+                    <div class="rounded-2xl overflow-hidden shadow-xl">
+                        <img src="/assets/images/issue-25-volume-7-oct-dec-2025.jpeg"
+                             alt="IITH Newsletter"
+                             class="w-full h-[420px] object-cover">
+                    </div>
+                    <p>Volume 7 | Issue 4 | Oct - Dec 2025</p>
+                    <h3>Sustainability Research@IITH</h3>
+
+                    <div class="mt-6 space-y-4">
+
+                        <!-- <a href=""
+                           class="block text-center px-6 py-3 rounded-full
+                                  bg-amber-600 text-white font-semibold
+                                  hover:bg-amber-700 transition">
+                            Flipbook
+                        </a> -->
+
+                        <a href="https://iith.ac.in/assets/newsletters/issue-25-volume-7-oct-dec-2025.pdf"
+                           class="block text-center px-6 py-3 rounded-full
+                                  bg-slate-900 text-white font-semibold
+                                  hover:bg-slate-800 transition">
+                            View PDF
+                        </a>
+                        
+                        <a href="https://pr.iith.ac.in/newsletter/all-issues.html"
+                           class="block text-center px-6 py-3 rounded-full
+                                  bg-slate-900 text-white font-semibold
+                                  hover:bg-slate-800 transition">
+                            Previous Issues
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+        <!-- News Section -->
+        <section id="news" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Latest News</h2>
+                </div>
+                <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    
+                    
+
+                    
+
+                    
+                        
+
+                        
+
+                                            
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                                <img class="h-56 w-full object-cover" src="/assets/images/news/MoP_2026.jpg" alt="IIT Hyderabad congratulates Prof. Suryanarayana Jammalamadaka, Department of Physics, on being awarded the 'Fellow of the Institute of Physics (FInstP), UK'">
+                                <div class="p-6">
+                                    <p class="text-sm font-medium text-amber-600">10 Jul 2026</p>
+                                    <h3 class="mt-2 text-xl font-semibold text-slate-800">IIT Hyderabad congratulates Prof. Suryanarayana Jammalamadaka, Department of Physics, on being awarded the 'Fellow of the Institute of Physics (FInstP), UK'</h3>
+                                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7481213785073115136" class="mt-4 inline-block text-amber-600 hover:text-amber-700 font-semibold">Read More &rarr;</a>
+                                </div>
+                            </div>
+                        
+                        
+
+                        
+
+                                            
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                                <img class="h-56 w-full object-cover" src="/assets/images/news/nsp.png" alt="National Fellowship and Scholarship for Higher Education of ST Students (Top Class Scheme) Fresh and Renewal Application opened on 01st June, 2026. Eligible students may apply for the same.">
+                                <div class="p-6">
+                                    <p class="text-sm font-medium text-amber-600">01 Jun 2026</p>
+                                    <h3 class="mt-2 text-xl font-semibold text-slate-800">National Fellowship and Scholarship for Higher Education of ST Students (Top Class Scheme) Fresh and Renewal Application opened on 01st June, 2026. Eligible students may apply for the same.</h3>
+                                    <a href="https://scholarships.gov.in/" class="mt-4 inline-block text-amber-600 hover:text-amber-700 font-semibold">Read More &rarr;</a>
+                                </div>
+                            </div>
+                        
+                        
+
+                        
+
+                                            
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                                <img class="h-56 w-full object-cover" src="/assets/images/news/phd_admissions_july_2026_flyer.jpg" alt="PhD Admissions for July 2026 is extended for few Departments">
+                                <div class="p-6">
+                                    <p class="text-sm font-medium text-amber-600">28 Apr 2026</p>
+                                    <h3 class="mt-2 text-xl font-semibold text-slate-800">PhD Admissions for July 2026 is extended for few Departments</h3>
+                                    <a href="https://iith.ac.in/phdadmissions/" class="mt-4 inline-block text-amber-600 hover:text-amber-700 font-semibold">Read More &rarr;</a>
+                                </div>
+                            </div>
+                        
+                        
+                        
+
+                        
+
+                        
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                                
+                                    <img class="h-56 w-full object-cover" src="/assets/images/news/cleanz_groundbreaking_2026.jpg" alt="Groundbreaking Ceremony of the COE-CLEANZ Building on 27 April 2026">
+                                
+                                <div class="p-6">
+                                    <p class="text-sm font-medium text-amber-600">22 Apr 2026</p>
+                                    <h3 class="mt-2 text-xl font-semibold text-slate-800">Groundbreaking Ceremony of the COE-CLEANZ Building on 27 April 2026</h3>
+                                    <a href="/news/2026/04/22/groundbreaking-ceremony-of-the-coe-cleanz-building/" class="mt-4 inline-block text-amber-600 hover:text-amber-700 font-semibold">Read More &rarr;</a>
+                                </div>
+                            </div>
+                        
+                        
+
+                        
+
+                        
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                                
+                                    <img class="h-56 w-full object-cover" src="/assets/images/news/sure-2026-results.jpg" alt="SURE Internship Results 2026 – Confirmation Deadline 05 May 2026">
+                                
+                                <div class="p-6">
+                                    <p class="text-sm font-medium text-amber-600">22 Apr 2026</p>
+                                    <h3 class="mt-2 text-xl font-semibold text-slate-800">SURE Internship Results 2026 – Confirmation Deadline 05 May 2026</h3>
+                                    <a href="/news/2026/04/22/sure-src-2026-results/" class="mt-4 inline-block text-amber-600 hover:text-amber-700 font-semibold">Read More &rarr;</a>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                        
+                        
+
+                        
+
+                                            
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                                <img class="h-56 w-full object-cover" src="/assets/images/news/pg_admissions_july_2026_flyer.jpg" alt="PG Admissions for July 2026 is open now">
+                                <div class="p-6">
+                                    <p class="text-sm font-medium text-amber-600">27 Mar 2026</p>
+                                    <h3 class="mt-2 text-xl font-semibold text-slate-800">PG Admissions for July 2026 is open now</h3>
+                                    <a href="https://iith.ac.in/pgadmissions/" class="mt-4 inline-block text-amber-600 hover:text-amber-700 font-semibold">Read More &rarr;</a>
+                                </div>
+                            </div>
+                        
+                </div>
+            </div>
+            <div class="text-center mt-16">
+                <a href="/news/"
+                class="inline-flex items-center px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-full transition">
+                    View All News →
+                </a>
+            </div>
+        </section>
+        
+<section id="news" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+        Student Highlights
+      </h2>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        
+        
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                  <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+        <img class="h-56 w-full object-cover" src="/assets/images/highlights/2026_mohit_singh_pmrf_symposium_iit_roorkee.jpeg" alt="Civil Engineering Scholar Mohit Singh Shines with Awards at PMRF Symposium and IIT Roorkee Conference">
+        <div class="p-6">
+          <p class="text-sm font-medium text-amber-600">07 Apr 2026</p>
+          <h3 class="mt-2 text-xl font-semibold text-slate-800">
+            Civil Engineering Scholar Mohit Singh Shines with Awards at PMRF Symposium and IIT Roorkee Conference
+          </h3>
+          <a href="/main-highlights/2026/04/07/2026_mohit_singh_pmrf_symposium_iit_roorkee/"
+             class="mt-4 inline-block text-amber-600 hover:text-amber-700 font-semibold">
+            Read More →
+          </a>
+        </div>
+      </div>
+                    
+            
+            
+            
+                  <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+        <img class="h-56 w-full object-cover" src="/assets/images/highlights/phd_venkateshwaran_g_jal_shakti_hackathon_award.jpeg" alt="PhD Scholar Mr. Venkateshwaran G Wins Jal Shakti Hackathon Award">
+        <div class="p-6">
+          <p class="text-sm font-medium text-amber-600">23 Mar 2026</p>
+          <h3 class="mt-2 text-xl font-semibold text-slate-800">
+            PhD Scholar Mr. Venkateshwaran G Wins Jal Shakti Hackathon Award
+          </h3>
+          <a href="/main-highlights/2026/03/23/phd_venkateshwaran_g_jal_shakti_hackathon_award/"
+             class="mt-4 inline-block text-amber-600 hover:text-amber-700 font-semibold">
+            Read More →
+          </a>
+        </div>
+      </div>
+                    
+                  <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+        <img class="h-56 w-full object-cover" src="/assets/images/highlights/iith_mtech_students_hydroscope_first_prize_riverathon.jpg" alt="MTech Students Win First Prize at 'Riverathon' Hackathon Organized by NMCG & World Bank">
+        <div class="p-6">
+          <p class="text-sm font-medium text-amber-600">23 Mar 2026</p>
+          <h3 class="mt-2 text-xl font-semibold text-slate-800">
+            MTech Students Win First Prize at 'Riverathon' Hackathon Organized by NMCG & World Bank
+          </h3>
+          <a href="/main-highlights/2026/03/23/mtech_students_hydroscope_first_prize_riverathon/"
+             class="mt-4 inline-block text-amber-600 hover:text-amber-700 font-semibold">
+            Read More →
+          </a>
+        </div>
+      </div>
+                    
+    </div>
+
+    <!-- View All Button -->
+    <div class="mt-12 text-center">
+      <a href="/highlights/"
+         class="inline-flex items-center px-8 py-3 rounded-full
+                bg-amber-600 text-white font-semibold
+                hover:bg-amber-700 transition
+                shadow-md hover:shadow-lg">
+        View All Highlights
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+        <!-- Statistics Section -->
+        <section id="statistics" class="py-28 bg-slate-900 text-white relative overflow-hidden">
+
+    <!-- Decorative Grid -->
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Header -->
+        <div class="text-center mb-20">
+            <span class="inline-block mb-3 px-4 py-1 text-sm font-semibold tracking-wide text-amber-400 bg-amber-400/10 rounded-full">
+                At a Glance
+            </span>
+            <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+                IIT Hyderabad by the Numbers
+            </h2>
+            <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-300">
+                A snapshot of our academic strength, research depth,
+                and growing national & global impact.
+            </p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+
+            <!-- Stat Tile -->
+            <div class="group bg-slate-800 border border-slate-700 rounded-2xl p-8
+                        hover:border-amber-500 transition">
+                <p class="text-sm uppercase tracking-wide text-slate-400">
+                    National Ranking
+                </p>
+                <h3 class="mt-4 text-6xl font-extrabold text-amber-400"
+                    data-target="7">
+                    7
+                </h3>
+                <p class="mt-3 text-lg font-medium text-slate-200">
+                    NIRF – Engineering
+                </p>
+            </div>
+
+            <!-- Stat Tile -->
+<div class="group bg-slate-800 border border-slate-700 rounded-2xl p-8
+            hover:border-amber-500 transition">
+    <p class="text-sm uppercase tracking-wide text-slate-400">
+        QS Ranking
+    </p>
+    <h3 class="mt-4 text-6xl font-extrabold text-amber-400"
+        data-target="664">
+        270
+    </h3>
+    <p class="mt-3 text-lg font-medium text-slate-200">
+        QS Asian University Ranking
+    </p>
+    <p class="mt-1 text-sm text-slate-400">
+        2026
+    </p>
+</div>
+
+            <!-- Stat Tile -->
+            <div class="group bg-slate-800 border border-slate-700 rounded-2xl p-8
+                        hover:border-amber-500 transition">
+                <p class="text-sm uppercase tracking-wide text-slate-400">
+                    Student Community
+                </p>
+                <h3 class="mt-4 text-6xl font-extrabold text-amber-400"
+                    data-target="5725">
+                    5725
+                </h3>
+                <p class="mt-3 text-lg font-medium text-slate-200">
+                    Students Enrolled
+                </p>
+                <p class="mt-1 text-sm text-slate-400">
+                    UG • PG • PhD
+                </p>
+            </div>
+
+            <!-- Stat Tile -->
+            <div class="group bg-slate-800 border border-slate-700 rounded-2xl p-8
+                        hover:border-amber-500 transition">
+                <p class="text-sm uppercase tracking-wide text-slate-400">
+                    Research Strength
+                </p>
+                <h3 class="mt-4 text-6xl font-extrabold text-amber-400"
+                    data-target="1614">
+                    1614
+                </h3>
+                <p class="mt-3 text-lg font-medium text-slate-200">
+                    PhD Scholars
+                </p>
+             
+            </div>
+
+            <!-- Stat Tile -->
+            <div class="group bg-slate-800 border border-slate-700 rounded-2xl p-8
+                        hover:border-amber-500 transition">
+                <p class="text-sm uppercase tracking-wide text-slate-400">
+                    Alumni Impact
+                </p>
+                <h3 class="mt-4 text-6xl font-extrabold text-amber-400"
+                    data-target="8703">
+                    8703
+                </h3>
+                <p class="mt-3 text-lg font-medium text-slate-200">
+                    Graduates
+                </p>
+                <p class="mt-1 text-sm text-slate-400">
+                    Across the globe
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Highlight Strip -->
+        <div class="mt-20 grid gap-8 text-center md:grid-cols-[1fr_1.5fr_1fr]">
+
+            <div class="p-6">
+                <h4 class="text-3xl font-bold text-amber-400">713+</h4>
+                <p class="mt-2 text-slate-300">
+                    Patents Filed
+                </p>
+            </div>
+
+            <div class="p-6 border-x border-slate-700">
+                <h4 class="text-3xl font-bold text-amber-400">339+</h4>
+                <p class="mt-2 text-slate-300">
+                    Startups Supported and generate a revenue of Rs. 1659+ Cr
+                </p>
+                <p class="mt-2 text-slate-300">
+                    (Rs. 335+ Cr funding in 2024-25, i.e. Rs. 1+ Cr per Faculty, one of the largest per capita funding among IITs)
+                </p>
+            </div>
+
+            <div class="p-6">
+                <h4 class="text-3xl font-bold text-amber-400">5266+</h4>
+                <p class="mt-2 text-slate-300">
+                    R & D Projects worth of Rs. 1640+ Cr
+                </p>
+            </div>
+
+        </div>
+
+
+    </div>
+</section>
+
+
+<!-- Research & Centres of Excellence -->
+<section id="research-centres" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <span class="inline-flex items-center mb-6 px-6 py-3
+             text-lg font-bold tracking-wide
+             text-amber-900 bg-amber-200
+             rounded-full shadow-sm">
+                Research Focus
+            </span>
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-slate-900">
+                Research & Centres of Excellence
+            </h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+                Interdisciplinary centres driving breakthrough research, strategic partnerships, and advanced technology development.
+            </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+    <!-- Tile 1 -->
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
+        <div class="aspect-square">
+            <img src="/assets/images/research-centres/vigraha.png" alt="CoE VIGRAHA" class="w-full h-full object-cover">
+        </div>
+        <div class="p-8">
+            <h3 class="text-xl font-semibold text-amber-600 mb-3">CoE VIGRAHA</h3>
+            
+        </div>
+    </div>
+
+    <!-- Tile 2 -->
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
+        <div class="aspect-square">
+            <img src="/assets/images/research-centres/dbt-sahaj1.jpg" alt="DBT-SAHAJ National Facility" class="w-full h-full object-cover">
+        </div>
+        <div class="p-8">
+            <h3 class="text-xl font-semibold text-amber-600 mb-3">DBT-SAHAJ National Facility</h3>
+            
+        </div>
+    </div>
+
+    <!-- Tile 3 -->
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
+        <div class="aspect-square">
+            <img src="/assets/images/research-centres/sathi.png" alt="DST SATHI – CISCoM" class="w-full h-full object-cover">
+        </div>
+        <div class="p-8">
+            <h3 class="text-xl font-semibold text-amber-600 mb-3">DST SATHI – CISCoM</h3>
+            
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
+        <div class="aspect-square">
+            <img src="/assets/images/research-centres/nikon.jpg" alt="IITH-Nikon Centre of Excellence" class="w-full h-full object-cover">
+        </div>
+        <div class="p-8">
+            <h3 class="text-xl font-semibold text-amber-600 mb-3">IITH-Nikon Centre of Excellence</h3>
+            
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
+        <div class="aspect-square">
+            <img src="/assets/images/research-centres/trihub.jpeg" alt="TRI HUB - Transportation Research and Innovation Hub" class="w-full h-full object-cover">
+        </div>
+        <div class="p-8">
+            <h3 class="text-xl font-semibold text-amber-600 mb-3">TRI HUB - Transportation Research and Innovation Hub</h3>
+            
+        </div>
+    </div>
+
+    <!-- Tile 6 -->
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
+        <div class="aspect-square">
+            <img src="/assets/images/research-centres/tihan1.jpeg" alt="TiHAN - Technology Innovation Hub" class="w-full h-full object-cover">
+        </div>
+        <div class="p-8">
+            <h3 class="text-xl font-semibold text-amber-600 mb-3">TiHAN - Technology Innovation Hub</h3>
+            
+        </div>
+    </div>
+
+</div>
+
+
+        <!-- CTA -->
+        <div class="mt-16 text-center">
+            <a href="https://www.iith.ac.in/research-centres/"
+               target="_blank"
+               class="inline-block px-8 py-4 bg-amber-600 text-white font-semibold rounded-full hover:bg-amber-700 transition">
+                Explore All Research Centres →
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+        <!-- Director's Message Section -->
+<section id="directors-message" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Header -->
+        <div class="text-center mb-14">
+            <h2 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+                A Message from the Director
+            </h2>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+                Leadership, vision, and the journey of IIT Hyderabad
+            </p>
+        </div>
+
+        <!-- Content -->
+        <div class="max-w-4xl mx-auto text-gray-700 text-lg leading-relaxed text-justify">
+
+            <!-- Director Profile (Wrapped + Animated) -->
+            <div class="director-photo
+                        float-none md:float-left md:mr-10
+                        mb-6 md:mb-4
+                        w-full md:w-72
+                        text-center md:text-left
+                        opacity-0">
+
+                <img
+                    src="https://iith.ac.in/assets/images/profiles/murty-bs.jpg"
+                    alt="Prof. B S Murty"
+                    class="rounded-xl shadow-xl w-full mx-auto"
+                >
+
+                <h3 class="mt-4 text-xl font-bold text-slate-900">
+                    Prof. B S Murty
+                </h3>
+                <p class="text-gray-600">
+                    Director, IIT Hyderabad
+                </p>
+            </div>
+
+            <!-- Message Content (UNCHANGED) -->
+            <p class="font-medium text-slate-900">
+                Dear Friends,<br>
+                Welcome to Indian Institute of Technology Hyderabad (IITH).
+            </p>
+
+            <p class="pb-[2%]">
+                <span class="font-semibold text-slate-900">
+                    “Inventing and Innovating in Technology for Humanity (IITH)”
+                </span>
+                is more than just a motto for IIT Hyderabad; it is the philosophy that defines our identity.
+                As an institute, we are committed to pushing the frontiers of knowledge while ensuring that
+                our ideas and innovations directly benefit people, industries, and the nation.
+            </p>
+
+            <p class="pb-[2%]">
+                We are proud of preparing dynamic leaders who make a difference to the world, nurtured
+                with the skills required for a better tomorrow. Though IITH has completed only 17 years
+                of its existence, it is gratifying to note that we are already almost on par with some
+                of the first-generation IITs, standing at the forefront of nurturing talent and innovation.
+            </p>
+
+            <p class="pb-[2%]">
+                The academic and research vibrancy of IITH is reflected in
+                <strong>NIRF-2025</strong>, where we achieved
+                <strong>7th rank among Engineering institutes</strong>,
+                <strong>6th in Innovation</strong>,
+                <strong>15th in Research</strong>,
+                and <strong>12th Overall</strong>.
+                Internationally, IITH is ranked
+                <strong>664 in QS World University Rankings-2026</strong>,
+                placing us among the top 10% of global institutions in citations per faculty.
+            </p>
+
+            <p class="pb-[2%]">
+                With a student strength of over <strong>5,750+</strong> across UG, PG, and PhD programs
+                (60% PG+PhD), we continue to lead in curriculum innovation—introducing India’s first
+                <strong>BTech in Artificial Intelligence</strong>.
+                Our <strong>Open to All Teaching (OAT)</strong> initiative and newly launched recording
+                studio strengthen our commitment to digital and inclusive education.
+            </p>
+
+            <p class="pb-[2%]">
+                At IITH, research and entrepreneurship go hand in hand. We have supported
+                <strong>320+ startups</strong>, launched the
+                <strong>BUILD</strong> program, and recently introduced
+                <strong>BHARATI</strong>, engaging 660 first-year students under 90 faculty mentors
+                in hands-on engineering experiences.
+            </p>
+
+            <p class="pb-[2%]">
+                Our ambitious initiative,
+                <strong>“Patent a Day: Mission 365”</strong>,
+                reflects our focus on translational research.
+                IITH has filed <strong>580+ patents</strong> so far,
+                including <strong>210+ in the last year alone</strong>.
+                We now host <strong>30+ Centres and Centres of Excellence</strong>
+                supporting impactful research and industry collaboration.
+            </p>
+
+            <p class="pb-[2%]">
+                Internationally, we have established strategic partnerships across seven countries,
+                including Japan, Australia, the USA, and Europe—reflecting our commitment to
+                global excellence.
+                Our alumni continue to inspire us through leadership in civil services,
+                entrepreneurship, social impact, and philanthropy.
+            </p>
+
+            <p class="pb-[2%]">
+                As India advances through initiatives such as
+                <strong>Digital India, Make in India, Startup India, Atmanirbhar Bharat</strong>,
+                and the <strong>Amrit Kaal Vision 2047</strong>,
+                IITH proudly aligns its efforts with national priorities.
+                Guided by the philosophy of
+                <strong>“Sabka Saath, Sabka Vikas”</strong>,
+                we actively contribute to inclusive and sustainable development,
+                especially through our Rural Development Centre initiatives.
+            </p>
+
+            <p class="pb-[2%]">
+                Looking ahead to <strong>Viksit Bharat @2047</strong>,
+                we aspire to position IIT Hyderabad as a hub of deep-tech research,
+                transformative education, and human-centred innovation.
+                I invite all stakeholders—students, faculty, staff, researchers,
+                industry partners, and alumni—to join us in this exciting journey
+                of national development and global impact.
+            </p>
+
+            <p class="font-semibold text-slate-900 pt-6 clear-both">
+                Prof. B S Murty<br>
+                Director, IIT Hyderabad
+            </p>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Innovations @ IITH -->
+<section id="innovations" class="py-16 bg-slate-50 border-t border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <div class="text-center mb-10">
+<span class="inline-flex items-center mb-6 px-6 py-3
+             text-lg font-bold tracking-wide
+             text-amber-900 bg-amber-200
+             rounded-full shadow-sm">
+  Innovations @ IITH
+</span>
+
+
+
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                From Lab to Impact
+            </h2>
+        </div>
+
+        <!-- Scrolling Wrapper -->
+        <div class="relative overflow-hidden">
+
+            <!-- Edge fades -->
+            <div class="pointer-events-none absolute left-0 top-0 h-full w-16
+                        bg-gradient-to-r from-slate-50 to-transparent z-10"></div>
+            <div class="pointer-events-none absolute right-0 top-0 h-full w-16
+                        bg-gradient-to-l from-slate-50 to-transparent z-10"></div>
+
+            <!-- Track -->
+                <div class="innovation-track">
+
+                    <div class="innovation-group">
+
+                        <!-- Innovation Card -->
+                <div class="innovation-card-lg">
+                    <img src="/assets/images/i1.png" alt="3D Printed Structures">
+                    <div class="p-5">
+                        <h3>National Firsts in 3D Printing</h3>
+                        <p>
+                            IITH, in collaboration with Simpliforge Creations, has delivered two national firsts, India’s first on-site 3D-printed protective structure in Leh with Lt Col Arun Krishnan & India’s first 3D-printed pedestrian bridge, conceptualized and evaluated by Prof K V L Subramaniam & his research group.
+                        </p>
+                    </div>
+                </div>
+
+                
+                <div class="innovation-card-lg">
+                    <img src="/assets/images/i2.png" alt="Autonomous Campus Shuttle">
+                    <div class="p-5">
+                        <h3>Autonomous Campus Shuttle</h3>
+                        <p>
+                            TiHAN at IITH has developed an autonomous campus shuttle, a driverless electric vehicle designed to operate within campus roads. Equipped with LiDAR, cameras, GPS, and AI-based navigation, it can detect obstacles, follow predefined routes, and ensure passenger safety with features like automatic braking.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="innovation-card-lg">
+                    <img src="/assets/images/i3.png" alt="Advanced System-on-Chip for IoT and Satellite Communication">
+                    <div class="p-5">
+                        <h3>Advanced System-on-Chip for IoT and Satellite Communication</h3>
+                        <p>
+                            Prof Kiran Kuchi of IIT Hyderabad, in collaboration with WiSig Networks, has developed an advanced System-on-Chip that enables reliable, low-power connectivity for the Internet of Things and next-generation satellite communication. The chip supports precise positioning through GNSS and India’s NavIC system and can intelligently process sensor data in real time. Designed to be compact and energy-efficient, it helps extend battery life in connected devices, highlighting IITH’s contribution to building indigenous, future-ready communication technologies for global use.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="innovation-card-lg">
+                    <img src="/assets/images/i4.png" alt="6G Research and Innovations">
+                    <div class="p-5">
+                        <h3>6G Research and Innovations</h3>
+                        <p>
+                            6G research led by Prof Kiran Kuchi in collaboration with WiSig Networks is working on 6G innovations built on WiSig’s open and programmable future network architecture, focusing on energy-efficient, AI-ready radio access networks with intelligent massive MIMO, advanced waveforms for next-generation frequency bands, integrated sensing and communication for applications such as UAV detection, post-quantum security solutions, and the development of broadband modem System-on-Chip technologies for future wireless networks.
+                        </p>
+                    </div>
+                </div>
+
+                    </div>
+
+                            <div class="innovation-group">
+
+<div class="innovation-card-lg">
+                    <img src="/assets/images/i5.png" alt="Synthetic Cornea Development">
+                    <div class="p-5">
+                        <h3>Synthetic Cornea Development</h3>
+                        <p>
+                            Dr Viswanath Chinthapenta, Prof Ramji M, Dr Sayan Basu (LVPEI) are working in partnership with LV Prasad Eye Institute to study the sutureability of the natural cornea. These findings provide fundamental insights into key design criteria for a synthetic cornea.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="innovation-card-lg">
+                    <img src="/assets/images/i6.png" alt="PURE Energy Ltd">
+                    <div class="p-5">
+                        <h3>PURE Energy Ltd</h3>
+                        <p>
+                            PURE Energy Ltd by Dr Nishanth Dongari & Rohit Vadera, is India's 1st All-In-One Energy Storage Products for Home & Commercial Segments.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="innovation-card-lg">
+                    <img src="/assets/images/i7.png" alt="DIGIPIN">
+                    <div class="p-5">
+                        <h3>DIGIPIN</h3>
+                        <p>
+                            IITH, Department of Posts, and NRSC (ISRO) Collaborated to Launch DIGIPIN: A National-Scale Geospatial Addressing System for India, developed by Dr Shashank Vatedka, Prof Soumya Jana & Dr Lakshmi Prasad Natarajan, Tarandeep Singh, a former MTech (AI) student.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="innovation-card-lg">
+                    <img src="/assets/images/i8.png" alt="DIGIPIN">
+                    <div class="p-5">
+                        <h3>DIGIPIN</h3>
+                        <p>
+                            TiHAN at IITH has developed Palyanka, a heavy-payload autonomous air ambulance drone capable of carrying up to 200 kg for rapid medical evacuation, disaster rescue and cargo transport. Designed to operate without human intervention, it offers lifesaving mobility in traffic-clogged cities and difficult terrains. 
+                        </p>
+                    </div>
+                </div>
+                            </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+        <section id="photo-gallery" class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Gallery</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">A visual journey through campus life, events, and achievements.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    
+                    
+                        <div class="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            
+                                <img src="/assets/images/gallery/voters-pledge-1.jpg" alt="voters-pledge-1" class="w-full h-48 object-cover">
+                            
+                        </div>
+                        <div class="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            
+                                <img src="/assets/images/gallery/voters-pledge-2.jpg" alt="voters-pledge-2" class="w-full h-48 object-cover">
+                            
+                        </div>
+                        <div class="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            
+                                <img src="/assets/images/gallery/annual_book_fair.jpg" alt="annual_book_fair" class="w-full h-48 object-cover">
+                            
+                        </div>
+                        <div class="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            
+                                <img src="/assets/images/gallery/annual_book_fair_2.jpg" alt="annual_book_fair_2" class="w-full h-48 object-cover">
+                            
+                        </div>
+                        <div class="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            
+                                <img src="/assets/images/gallery/eml_talk.jpg" alt="eml_talk" class="w-full h-48 object-cover">
+                            
+                        </div>
+                        <div class="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            
+                                <img src="/assets/images/gallery/simbio.jpg" alt="simbio" class="w-full h-48 object-cover">
+                            
+                        </div>
+                        <div class="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            
+                                <img src="/assets/images/gallery/simbio2.jpg" alt="simbio2" class="w-full h-48 object-cover">
+                            
+                        </div>
+                        <div class="rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                            
+                                <img src="/assets/images/gallery/ai-impact-summit.jpeg" alt="ai-impact-summit" class="w-full h-48 object-cover">
+                            
+                        </div>
+                    
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300">
+    <div class="max-w-7xl mx-auto px-6 py-16">
+
+        <!-- Top Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
+
+            <!-- Academics -->
+            <div>
+                <h4 class="text-white font-semibold tracking-wide mb-4">
+                    ACADEMICS
+                </h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="https://aims.iith.ac.in/aims/" class="hover:text-amber-400">AIMS</a></li>
+                    <li><a href="https://iith.ac.in/gian/" class="hover:text-amber-400">GIAN</a></li>
+                    <li><a href="https://cce.iith.ac.in/" class="hover:text-amber-400">CCE</a></li>
+                    <li><a href="/academics/index.html" class="hover:text-amber-400">Office of Academic Affairs</a></li>
+                    <li><a href="https://raiith.krc.iith.ac.in" class="hover:text-amber-400">RAIITH</a></li>
+                </ul>
+            </div>
+
+            <!-- Facilities -->
+            <div>
+                <h4 class="text-white font-semibold tracking-wide mb-4">
+                    FACILITIES
+                </h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="https://library.iith.ac.in/" class="hover:text-amber-400">Library</a></li>
+                    <li><a href="https://comp.iith.ac.in/" class="hover:text-amber-400">Computer Centre</a></li>
+                    <li><a href="https://cws.iith.ac.in/" class="hover:text-amber-400">Central Workshop</a></li>
+                    <li><a href="https://hospital.iith.ac.in/" class="hover:text-amber-400">Medical Facilities</a></li>
+                    <li><a href="/bus_schedule/" class="hover:text-amber-400">Bus Schedule</a></li>
+                    <li><a href="https://knowledgecafe.comp.iith.ac.in/" target="_blank" class="hover:text-amber-400">IITH ICT Knowledge Cafe</a></li>
+                    <li><a href="https://paramseva.comp.iith.ac.in/" class="hover:text-amber-400">PARAM Seva HPC</a></li>
+                    <li><a href="https://gpucluster.comp.iith.ac.in/" class="hover:text-amber-400">GPU Cluster - NVIDIA A100</a></li>
+                </ul>
+            </div>
+
+            <!-- Campus Life -->
+            <div>
+                <h4 class="text-white font-semibold tracking-wide mb-4">
+                    CAMPUS LIFE
+                </h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/about/campus_services/" class="hover:text-amber-400">Campus Services</a></li>
+                    <li><a href="/about/aboutiith/#reach" class="hover:text-amber-400">Getting Here</a></li>
+                    <li><a href="https://cins.iith.ac.in/" class="hover:text-amber-400">Campus Navigation</a></li>
+                    <li><a href="http://security.iith.ac.in/" class="hover:text-amber-400">Security</a></li>
+                    <li><a href="https://discourse.iith.ac.in/" class="hover:text-amber-400">Discourse</a></li>
+                </ul>
+            </div>
+
+            <!-- Councils -->
+            <div>
+                <h4 class="text-white font-semibold tracking-wide mb-4">
+                    COUNCILS
+                </h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="https://scstcell.iith.ac.in/" class="hover:text-amber-400">SC ST Cell</a></li>
+                    <li><a href="https://ocs.iith.ac.in/" class="hover:text-amber-400">Office of Career Services</a></li>
+                    <li><a href="https://nss.iith.ac.in/" class="hover:text-amber-400">NSS</a></li>
+                    <li><a href="https://icc.iith.ac.in/" class="hover:text-amber-400">Internal Complaints Committee</a></li>
+                    <li><a href="http://cgc.iith.ac.in/" class="hover:text-amber-400">Committee for Gender Concerns</a></li>
+                    <li><a href="https://sunshine.iith.ac.in/" class="hover:text-amber-400">Sunshine</a></li>
+                    <li><a href="https://www.gymkhana.iith.ac.in/" class="hover:text-amber-400">Gymkhana (Student Council)</a></li>
+                    <li><a href="https://ebsb.iith.ac.in/" class="hover:text-amber-400">EBSB Club</a></li>
+                    <li><a href="http://hostel.iith.ac.in/" class="hover:text-amber-400">Hostel Coordinating Unit</a></li>
+                    <li><a href="https://sites.google.com/iith.ac.in/safety" class="hover:text-amber-400">Laboratory Safety</a></li>
+                    <li><a href="https://sites.google.com/iith.ac.in/safety" class="hover:text-amber-400">Statutory Bodies (IBSC, IAEC & IEC)</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-white font-semibold tracking-wide mb-4">
+                    QUICK LINKS
+                </h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="https://disha.iith.ac.in/disha/dashboard" target="_blank" class="hover:text-amber-400">DISHA</a></li>
+                    <li><a href="/tenders/" class="hover:text-amber-400">Tender Invitations</a></li>
+                    <li><a href="https://intranet.iith.ac.in/" class="hover:text-amber-400">Intranet</a></li>
+                    <li><a href="/emergency_contacts/" class="hover:text-amber-400">Emergency Contacts</a></li>
+                    <li><a href="/web_team/" class="hover:text-amber-400">Website Team</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex justify-center gap-6 mt-14">
+            <a href="https://www.facebook.com/iithyderabad/" target="_blank" class="text-white hover:text-amber-400 text-3xl">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/IITHyderabad" target="_blank" class="text-white hover:text-amber-400 text-3xl">
+                <i class="fa-brands fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/school/iithyderabad/" target="_blank" class="text-white hover:text-amber-400 text-3xl">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.instagram.com/iithyderabad/" target="_blank" class="text-white hover:text-amber-400 text-3xl">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/c/IITHyderabadofficial" target="_blank" class="text-white hover:text-amber-400 text-3xl">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="mt-10 pt-6 border-t border-slate-700
+                    flex flex-col md:flex-row justify-between items-center
+                    text-sm text-slate-400">
+
+            <p class="text-center md:text-left">
+                © 2026 Indian Institute of Technology Hyderabad, Kandi, Sangareddy,
+                Telangana, India. All rights reserved.
+            </p>
+
+            <div class="mt-3 md:mt-0 space-x-3">
+                <a href="/rti/" class="hover:text-amber-400">RTI</a>
+                <span>|</span>
+                <a href="/contact_us/" class="hover:text-amber-400">Contact us</a>
+            </div>
+
+        </div>
+
+    </div>
+</footer>
+
+  
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpenIcon = document.getElementById('menu-open-icon');
+            const menuCloseIcon = document.getElementById('menu-close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+                menuOpenIcon.classList.toggle('hidden');
+                menuCloseIcon.classList.toggle('hidden');
+            });
+
+            // Generic Carousel Function
+            function setupCarousel(carouselId, prevButtonId, nextButtonId, autoSlide = false, intervalTime = 2000) {
+                const carouselContainer = document.getElementById(carouselId);
+                const track = carouselContainer.querySelector('.carousel-track');
+                const slides = Array.from(track.children);
+                const nextButton = document.getElementById(nextButtonId);
+                const prevButton = document.getElementById(prevButtonId);
+                
+                let currentIndex = 0;
+                let slideWidth = slides[0].getBoundingClientRect().width;
+                let autoSlideInterval;
+
+                const updateSlideWidth = () => {
+                    slideWidth = slides[0].getBoundingClientRect().width;
+                    track.style.transition = 'none'; // Disable transition during resize
+                    track.style.transform = 'translateX(-' + slideWidth * currentIndex + 'px)';
+                    // Re-enable transition after a short delay
+                    setTimeout(() => {
+                        track.style.transition = 'transform 0.5s ease-in-out';
+                    }, 50); 
+                };
+
+                const moveToSlide = (targetIndex) => {
+                    track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+                    currentIndex = targetIndex;
+                };
+
+                const slideNext = () => {
+                    const nextIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
+                    moveToSlide(nextIndex);
+                };
+
+                const startAutoSlide = () => {
+                    if (autoSlide) {
+                        autoSlideInterval = setInterval(slideNext, intervalTime);
+                    }
+                };
+
+                const stopAutoSlide = () => {
+                    clearInterval(autoSlideInterval);
+                };
+
+                nextButton.addEventListener('click', () => {
+                    stopAutoSlide(); // Stop auto-sliding on manual interaction
+                    slideNext();
+                    startAutoSlide(); // Restart auto-sliding after manual interaction
+                });
+                
+                prevButton.addEventListener('click', () => {
+                    stopAutoSlide(); // Stop auto-sliding on manual interaction
+                    const prevIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+                    moveToSlide(prevIndex);
+                    startAutoSlide(); // Restart auto-sliding after manual interaction
+                });
+
+                window.addEventListener('resize', updateSlideWidth);
+                updateSlideWidth(); // Initial calculation
+                startAutoSlide(); // Start auto-sliding on load
+            }
+
+            // Setup Hero Carousel with auto-slide
+            setupCarousel('hero-carousel', 'hero-carousel-prev', 'hero-carousel-next', true, 2500); // Auto-slide every 5 seconds
+
+            // Setup Research Carousel (you'll need to add the HTML structure for this first if it's not there)
+            // For example, if you add a research carousel later with id="research-carousel", uncomment this:
+            // setupCarousel('research-carousel', 'research-carousel-prev', 'research-carousel-next', true, 4000); // Auto-slide every 4 seconds
+
+
+            // Animated Statistics Counter
+            const statsContainer = document.getElementById('stats-container');
+            if (statsContainer) { // Ensure the container exists before trying to animate
+                const counters = statsContainer.querySelectorAll('[data-target]');
+                const speed = 200; // Determines animation speed
+
+                const animateCounter = (counter) => {
+                    const target = +counter.getAttribute('data-target');
+                    let current = 0; // Start from 0
+                    const increment = target / speed; // Calculate increment per step
+
+                    const updateCount = () => {
+                        if (current < target) {
+                            current += increment;
+                            counter.innerText = Math.ceil(current); // Round up to show whole numbers
+                            requestAnimationFrame(updateCount); // Use requestAnimationFrame for smoother animation
+                        } else {
+                            counter.innerText = target; // Ensure it ends exactly on the target number
+                        }
+                    };
+                    updateCount();
+                };
+                const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        counters.forEach(counter => {
+                            animateCounter(counter);
+                        });
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% of the element is visible
+
+            observer.observe(statsContainer); // Observe the main stats container
+        }
+        });
+    </script>
+
+<script>
+function toggleDropdown(id) {
+    document.getElementById(id).classList.toggle('hidden');
+}
+</script>
+<!-- Scroll to Top Button -->
+<button id="scrollToTopBtn"
+    aria-label="Scroll to top"
+    class="fixed bottom-6 right-6 z-50 hidden
+           bg-amber-600 hover:bg-amber-700
+           text-white p-3 rounded-full shadow-xl
+           transition-all duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         class="h-6 w-6"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 15l7-7 7 7" />
+    </svg>
+</button>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+
+    // Show / hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            scrollBtn.classList.remove('hidden');
+        } else {
+            scrollBtn.classList.add('hidden');
+        }
+    });
+
+    // Scroll to top smoothly
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const directorPhoto = document.querySelector('.director-photo');
+    if (!directorPhoto) return;
+
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.35,
+            rootMargin: '0px 0px -50px 0px'
+        }
+    );
+
+    observer.observe(directorPhoto);
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.research-track');
+    const slides = document.querySelectorAll('.research-slide');
+    const nextBtn = document.getElementById('research-next');
+    const prevBtn = document.getElementById('research-prev');
+
+    let index = 0;
+    const total = slides.length;
+
+    function updateSlide() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+        index = (index + 1) % total;
+        updateSlide();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        index = (index - 1 + total) % total;
+        updateSlide();
+    });
+
+    // Auto-slide (optional)
+    setInterval(() => {
+        index = (index + 1) % total;
+        updateSlide();
+    }, 7000);
+});
+</script>
+
+</body>
+</html>

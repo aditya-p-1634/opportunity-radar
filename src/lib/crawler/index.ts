@@ -11,6 +11,9 @@ import { slugify, uniqueSlug, hashString } from "@/lib/utils";
 import { CRAWLER_REGISTRY } from "./registry";
 import { retrieve } from "./retriever";
 import { parseFieldsDeterminstically, parseFieldsWithGemini } from "./parser";
+export { validateScraper, validateAllScrapers } from "./validator";
+export type { ScraperValidationResult, CrawlerNetworkValidationReport } from "./validator";
+
 
 export interface CrawlResult {
   jobId: string;

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NISER</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="robots" content="nocache, index, nofollow">
+  <meta name="description" content="National Institute of Science Education and Research Bhubaneswar">
+  <meta name="keywords" content="research, autonomous, dae, central government, niser">
+  <link href=https://www.niser.ac.in/build/assets/bootstrap.min.css rel="stylesheet">
+  <link href=https://www.niser.ac.in/build/assets/bootstrap-icons.css rel="stylesheet">
+  <link href=https://www.niser.ac.in/build/assets/variables.css rel="stylesheet">
+  <link href=https://www.niser.ac.in/build/assets/main.css rel="stylesheet">
+  <link href=https://www.niser.ac.in/build/assets/top-bar.css rel="stylesheet">
+  <link href=https://www.niser.ac.in/build/assets/cookiealert.css rel="stylesheet">
+  <link href=https://www.niser.ac.in/build/assets/bootstrap.newsbox.min.css rel="stylesheet">  
+  <link href=https://www.niser.ac.in/build/assets/custom.css rel="stylesheet">
+  <script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" src=https://www.niser.ac.in/assets/vendor/ckeditor5/build/ckeditor.js></script>
+  <script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" src=https://www.niser.ac.in/build/assets/jquery-3.6.4.min.js></script>
+  <script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" src=https://www.niser.ac.in/build/assets/bootstrap.bundle.min.js></script>
+  </head>
+<body style="margin-top:2rem;" data-bs-theme="auto">
+<!--- Begin topbar -->
+  <header id="topbar">
+                <div class="container">
+      <div class="row">
+        <div class="navigate col">
+          <a href="https://mail.google.com/a/niser.ac.in" target="_blank" data-bs-toggle="tooltip" title="NISER-GMail"><i class="bi bi-envelope-at"></i><b class='hide'>&nbsp;MAIL</b></a>
+          <a href="https://ims.niser.ac.in/" target="_blank" data-bs-toggle="tooltip" title="Institute Management System"><i class="bi bi-people"></i><b class='hide'>&nbsp;IMS</b></a>
+  <a href="/dashboard" data-bs-toggle="tooltip" title="Unlock Dashboard"><i class="bi bi-lock-fill"></i><b class='hide'>&nbsp;LOGIN</b></a>
+        </div>
+        <div class="navigate justify-content-end col">
+					<div class="dropdown">
+						<a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class='fs-5' id='lng'><span id='lng' >English</span></a>
+						<ul class="dropdown-menu" style="--bs-dropdown-min-width:5rem" data-bs-toggle="tooltip" title="Change language">
+							<li><a class="dropdown-item" onClick="setLocale('En')" style="color:var(--bs-dropdown-color);cursor:pointer;padding:0px">English</a></li>
+							<li><a class="dropdown-item" onClick="setLocale('Hi')" style="color:var(--bs-dropdown-color);cursor:pointer;padding:2px 0 0 0; font-family:'Noto Sans Devanagari'">हिंदी</a></li>
+							<li><a class="dropdown-item" onClick="setLocale('Od')" style="color:var(--bs-dropdown-color);cursor:pointer;padding:2px 0 0 0; font-family:'Noto Sans Oriya'">ଓଡ଼ିଆ</a></li>
+						</ul>
+					</div>
+          <a href="#main-content" data-bs-toggle="tooltip" title="Skip to Content"><i class="bi bi-caret-down-square-fill"></i></a> <i class="bi bi-brightness-high-fill color-yellow" title="Light theme" data-bs-toggle="tooltip"></i>
+          <div class="form-switch form-control-color"><input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" ></div>
+          <i class="bi bi-moon-fill" title="Dark theme" style="color:#AAA" data-bs-toggle="tooltip"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+<!-- End topbar -->
+<!-- Begin Navbar -->
+  <header id="header" class="header bg-primary-dark sticky-top" data-scrollto-offset="0">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="/" class="logo d-flex align-items-center me-auto me-lg-0">
+        <img src="https://www.niser.ac.in/assets/pix/NISER-White-Logo.png" alt="">
+        <h1 style="font-family:'Roboto Condensed';font-weight:bold;color:#FFF;margin-top:5px">NISER</h1>
+      </a>
+			<nav id="navbar" class="navbar">
+        <ul>
+          <li class="dropdown"><a href="#">About <i class="bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/about/institute">About Institute</a></li>
+              <li><a href="/about/director">Director</a></li>
+              <li><a href="/about/annualreport">Annual Report</a></li>
+              <li><a href="/about/newsletter">VIBES Newsletter</a></li>
+              <li><a href="/about/byelaws">Bye-Laws</a></li>
+              <hr class="color-cyan">
+              <li><a href="/about/logo">About Logo</a></li>
+              <li><a href="/about/how2reach">Reaching NISER</a></li>
+              <li><a href="/about/contacts">Contacts</a></li>
+              <li><a href="/about/disclaimer">Disclaimer</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#">Schools <i class="bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/sbs">Biological Sciences</a></li>
+              <li><a href="/scs">Chemical Sciences</a></li>
+              <li><a href="/scos">Computer Sciences</a></li>
+              <li><a href="/seps">Earth & Planetary Sciences</a></li>
+              <li><a href="/shss">Humanities & Social Sciences</a></li>
+              <li><a href="/sms">Mathematical Sciences</a></li>
+              <li><a href="/sps">Physical Sciences</a></li>
+              <li><a href="/cmrp">Medical & Radiation Physics</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#">People <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/people/fac">Faculty Members</a></li>
+              <li class="dropdown"><a href="#">Staff Members <i class="bi bi-chevron-right dropdown-indicator"></i></a>
+                <ul>
+                  <li><a href="/people/scf">Scientific</a></li>
+                  <li><a href="/people/tch">Technical</a></li>
+                  <li><a href="/people/adm">Administrative</a></li>
+                  <li><a href="/people/aux" class="nav-link disabled color-gray">Auxiliary</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#">Disciples <i class="bi bi-chevron-right dropdown-indicator"></i></a>
+                <ul>
+                  <li><a href="/people/disciples/im">Integrated MSc</a></li>
+                  <li><a href="/people/disciples/mr">MSc (Rad. Physics)</a></li>
+                  <li><a href="/people/disciples/ip">Integrated MSc-PhD</a></li>
+                  <li><a href="/people/disciples/ph">PhD</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#">Students <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+							<li><a href="/sa" class="nav-link disabled color-gray">Student Affairs</a></li>
+              <li class="dropdown"><a href="#"><span>Student Clubs</span> <i class="bi bi-chevron-right dropdown-indicator"></i></a>
+                <ul>
+                  <li><a href="https://astroclub-niser.github.io/" target="_blank">Astronomy <i class="bi-link-45deg"></i></a></li>
+<!--                  <li><a href="#">Chess</a></li>-->
+                  <li><a href="https://sdgniser.github.io/" target="_blank">Coding <i class="bi-link-45deg"></i></a></li>
+<!--                  <li><a href="#" target="_blank">Dance</a></li>-->
+<!--                  <li><a href="#" target="_blank">Drama &amp; Music</a></li>-->
+<!--                  <li><a href="#" target="_blank">Film</a></li>-->
+<!--                  <li><a href="#" target="_blank">Gaming</a></li>-->
+                  <li><a href="https://mathematix4.wixsite.com/mathematix" target="_blank">MathematiX <i class="bi-link-45deg"></i></a></li>
+                  <li><a href="https://sites.google.com/niser.ac.in/thebioclub" target="_blank">TheBioClub <i class="bi-link-45deg"></i></a></li>
+                  <li><a href="https://sites.google.com/niser.ac.in/tfr-chem" target="_blank">The Free Radicals <i class="bi-link-45deg"></i></a></li>
+<!--                  <li><a href="#" target="_blank">Nature</a></li>-->
+                  <li><a href="https://rtcniser.github.io/" target="_blank">RoboTech Club <i class="bi-link-45deg"></i></a></li>
+                  <li><a href="https://sites.google.com/niser.ac.in/sapsara/home" target="_blank">Photography <i class="bi-link-45deg"></i></a></li>
+<!--                  <li><a href="#" target="_blank">Science Activities</a></li>-->
+<!--                  <li><a href="#" target="_blank">Software Development</a></li>-->
+                  <li><a href="https://sites.google.com/a/niser.ac.in/litc" target="_blank">Literary Club <i class="bi-link-45deg"></i></a></li>
+                  <li><a href="https://arc-niser.github.io/website/">Arts Club <i class="bi-link-45deg"></i></a></li>
+                  <li><a href="https://sportsniser.wordpress.com/" target="_blank">Sports <i class="bi-link-45deg"></i></a></li>
+                  <li><a href="https://vikiran-niser.github.io/vikiran-website/" target="_blank">Vikiran <i class="bi-link-45deg"></i></a></li>
+<!--                  <li><a href="#" target="_blank">Yoga</a></li>-->
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>Alumni</span> <i class="bi bi-chevron-right dropdown-indicator"></i></a>
+                <ul>
+                  <li><a href="/people/alumni/im">Integrated MSc</a></li>
+                  <li><a href="/people/alumni/mr">MSc (Rad. Physics)</a></li>
+                  <li><a href="/people/alumni/ip">Integrated MSc-PhD</a></li>
+                  <li><a href="/people/alumni/ph">PhD</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Placement Cell</a></li>
+              <li><a href="/students/ARC">Anti-Ragging Cell</a></li>
+              <li><a href="/students/SCC">Counselling Cell</a></li>
+              <hr class="color-cyan">
+              <li><a href="/intranet">Student Forms <i class="bi-cloud-slash"></i></a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#">Administration <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/admin/bog">Board of Governors</a></li>
+              <li><a href="/admin/dean-fic">Deans & Faculty-in-Charge</a></li>
+              <li><a href="/admin/registrar">Registrar</a></li>
+              <li><a href="/admin/vigilance">Chief Vigilance Officer</a></li>
+              <li><a href="/fa">Faculty Affairs</a></li>
+              <li><a href="/cc">Computer Centre</a></li>
+              <li><a href="/iwd">Institute Works Department</a></li>
+              <hr class="color-cyan">
+              <li><a href="/content/women-cell">Internal Complaints Committee</a></li>
+              <li><a href="/admin/egr-cell">Grievance Redressal Cell</a></li>            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Academic</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/acad/admission">Admission</a></li>
+              <li><a href="/acad/education">Education</a></li>
+              <li><a href="/acad/ac">Academic Council</a></li>
+              <li><a href="/acad/ugci">UG Committee of Institute</a></li>
+              <li><a href="/acad/pgci">PG Committee of Institute</a></li>
+              <hr class="color-cyan">
+              <li><a href="http://www.hbni.ac.in/">HBNI <i class="bi-link-45deg"></i></a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Research</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/resdev">R & D Section</a></li>
+              <li class="dropdown"><a href="#"><span>Research Facilities</span> <i class="bi bi-chevron-right dropdown-indicator"></i></a>
+                <ul>
+                  <li><a href="/res/hpc">Cluster Computing</a></li>
+                  <li><a href="/cmw">Central Workshop</a></li>
+                  <li><a href="/ncare">Animal House (NCare)</a></li>
+                  <li><a href="/res/iuf">Inst. User Facilities</a></li><!--<i class="bi-file-pdf color-orange fs-5"></i>-->
+								</ul>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown megamenu"><a href="#">Facilities <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li>
+                <a href="/library/">Central Library</a>
+                <a href="/facility/audi">Auditorium &amp; Halls</a>
+                <a href="/healthcentre">Health Centre</a>
+              </li>
+              <li>
+                <a href="/hostels">Hostels</a>
+                <a href="/facility/trans">Transportation</a>
+                <a href="/cis">Interdisciplinary Sciences</a>
+              </li>
+              <li>
+                <a href="/facility/commcentre">Community Centre</a>
+                <a href="/facility/medcentre">Meditation Centre</a>
+                <a href="/facility/shops">Shopping Complex</a>
+              </li>
+              <li>
+                <a href="https://nisercreche.wixsite.com/niser-creche-home">Crèche <i class="bi-link-45deg"></i></a>
+                <a href="/facility/aquatic-complex" class="nav-link disabled color-gray">Aquatic Complex</a>
+                <a href="/facility/postoff" class="nav-link disabled color-gray">Post Office / Banks &amp; ATMs</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Career</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li class="dropdown"><a href="#"><span>Vacancies</span> <i class="bi bi-chevron-right dropdown-indicator"></i></a>
+                <ul style="left:-124%">
+                  <li><a href="/career/staff/reg/cr">Regular</a></li>
+                  <li><a href="/career/staff/ft/cr">Fixed-Term / Contractual</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+			<i class="bi bi-grid-3x3-gap mobile-nav-toggle color-white d-none m-1"></i>
+<!--
+      <a class="btn-getstarted color-yellow" href="https://www.nestexam.in/"><b>NEST</b></a>
+-->
+    </div>
+  </header>
+<!-- End Navbar -->
+<!-- Begin Header -->
+  <div class="container mt-3">
+    <div class="row justify-content-md-center align-items-center">
+      <div class="col-lg-2">
+        <div class="contents text-center pb-2">
+          <img id='logo-auto' src="https://www.niser.ac.in/assets/pix/NLogo-Blue.png" style="display:inline;width:100%;max-width:200px">
+          <img id='logo-dark' src="https://www.niser.ac.in/assets/pix/NLogo-Grey.png" style="display:none;width:100%;max-width:200px">
+        </div>
+      </div>
+      <div class="col-lg-auto">
+        <div class="contents text-center">
+            <span class="fs-5"><h3 style="font-family: 'Anek Odia';line-height:25px" class="mt-2">ଜାତୀୟ ବିଜ୍ଞାନ ଶିକ୍ଷା ଏବଂ ଗବେଷଣା ପ୍ରତିଷ୍ଠାନ<br>
+            <font class='f12'>ପରମାଣୁ ଶକ୍ତି ବିଭାଗ, ଭାରତ ସରକାରଙ୍କ ଏକ ସ୍ବୟଂଶାସିତ ପ୍ରତିଷ୍ଠାନ</font></h3><h3 style="font-family: 'Anek Devanagari';line-height:25px">राष्ट्रीय विज्ञान शिक्षा एवं अनुसंधान संस्थान<br><font class='f12'>परमाणु ऊर्जा विभाग, भारत सरकार का एक स्वयंशासित संस्थान</font></h3><h3 style="line-height:22px">National Institute of Science Education and Research<br><font class='f12'>AN AUTONOMOUS INSTITUTE UNDER DAE, GOVT. OF INDIA</font></h3></span>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="contents text-center pb-2">
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- -End Header -->
+<div>&nbsp;</div>
+<style type="text/css">
+  @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100..900&display=swap);
+	.od {font-family: 'Noto Sans Oriya';font-size:18px;font-weight:300}
+	.odh {font-family: 'Noto Sans Oriya';font-size:22px;font-weight:300}
+	.hn {font-family: 'Noto Sans Devanagari';font-size:18px;font-weight:300}
+	.hnh {font-family: 'Noto Sans Devanagari';font-size:22px;font-weight:300}
+</style>
+<!-- Begin Carousel-I -->
+  <div id="carouselCaptions" class="container carousel carousel-fade shadow p-1 mb-1 mt-0 bg-body" data-bs-ride="carousel"> <!-- data-bs-ride="true" to prevent pause on hover -->
+    <div class="carousel-indicators">
+  	<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" aria-label="Slide 1"  class="active" aria-current="true"><span></span></button>  
+  	<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2" ><span></span></button>  
+  	<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3" ><span></span></button>  
+  	<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="3" aria-label="Slide 4" ><span></span></button>  
+  	<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="4" aria-label="Slide 5" ><span></span></button>  
+  	<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="5" aria-label="Slide 6" ><span></span></button>  
+  	<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="6" aria-label="Slide 7" ><span></span></button>  
+  	<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="7" aria-label="Slide 8" ><span></span></button>  
+      </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+        <img src="https://www.niser.ac.in/assets/pix/carousel/250626_1043_carousel.webp" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block" style="left:0;right:0;bottom:1.5rem;padding:1rem 0 0.5rem 2rem;background-color: rgba(0,0,0,0.5)">
+          <h4 align="left" class="color-white">UG Admission 2026</h4>
+          <p align="left" style="color:#ffffffa6">After NEST 2026. <a class='btn btn-sm btn-primary' href='/admission/' target='_blank'>Visit Admission Portal</a> </p>
+        </div>
+      </div>
+        <div class="carousel-item">
+        <img src="https://www.niser.ac.in/assets/pix/carousel/140725_1_carousel.webp" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block" style="left:0;right:0;bottom:1.5rem;padding:1rem 0 0.5rem 2rem;background-color: rgba(0,0,0,0.5)">
+          <h4 align="left" class="color-white">Central Library : New Arrivals Section</h4>
+          <p align="left" style="color:#ffffffa6">Par excellence. </p>
+        </div>
+      </div>
+        <div class="carousel-item">
+        <img src="https://www.niser.ac.in/assets/pix/carousel/140725_2_carousel.webp" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block" style="left:0;right:0;bottom:1.5rem;padding:1rem 0 0.5rem 2rem;background-color: rgba(0,0,0,0.5)">
+          <h4 align="left" class="color-white">Auditorium during DAE Conclave</h4>
+          <p align="left" style="color:#ffffffa6">Stunning night view. </p>
+        </div>
+      </div>
+        <div class="carousel-item">
+        <img src="https://www.niser.ac.in/assets/pix/carousel/140725_3_carousel.webp" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block" style="left:0;right:0;bottom:1.5rem;padding:1rem 0 0.5rem 2rem;background-color: rgba(0,0,0,0.5)">
+          <h4 align="left" class="color-white">Gulmohar - <em>the Flamboyant</em></h4>
+          <p align="left" style="color:#ffffffa6">Delonix regia. </p>
+        </div>
+      </div>
+        <div class="carousel-item">
+        <img src="https://www.niser.ac.in/assets/pix/carousel/140725_4_carousel.webp" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block" style="left:0;right:0;bottom:1.5rem;padding:1rem 0 0.5rem 2rem;background-color: rgba(0,0,0,0.5)">
+          <h4 align="left" class="color-white">Crepuscular Rays</h4>
+          <p align="left" style="color:#ffffffa6">Over workshop and chemical disposal chambers. </p>
+        </div>
+      </div>
+        <div class="carousel-item">
+        <img src="https://www.niser.ac.in/assets/pix/carousel/140725_5_carousel.webp" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block" style="left:0;right:0;bottom:1.5rem;padding:1rem 0 0.5rem 2rem;background-color: rgba(0,0,0,0.5)">
+          <h4 align="left" class="color-white">Residential Area</h4>
+          <p align="left" style="color:#ffffffa6">Post-sunset. </p>
+        </div>
+      </div>
+        <div class="carousel-item">
+        <img src="https://www.niser.ac.in/assets/pix/carousel/140725_6_carousel.webp" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block" style="left:0;right:0;bottom:1.5rem;padding:1rem 0 0.5rem 2rem;background-color: rgba(0,0,0,0.5)">
+          <h4 align="left" class="color-white">Pennisetum Setaceum</h4>
+          <p align="left" style="color:#ffffffa6">Barunei hills in <em>Bokeh</em>. </p>
+        </div>
+      </div>
+        <div class="carousel-item">
+        <img src="https://www.niser.ac.in/assets/pix/carousel/140725_7_carousel.webp" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block" style="left:0;right:0;bottom:1.5rem;padding:1rem 0 0.5rem 2rem;background-color: rgba(0,0,0,0.5)">
+          <h4 align="left" class="color-white">Hostel Block - II</h4>
+          <p align="left" style="color:#ffffffa6">Where degree-seekers dwell. </p>
+        </div>
+      </div>
+      </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<!-- End Carousel-I -->
+  <div id='main-content' class="pt-4"></div>
+  <div class="container px-2 py-1" id="featured-3">
+    <div class="row g-4 py-2 row-cols-1 row-cols-lg-3">
+<!-- Begin News -->
+      <div class="feature col">
+        <h2 class="fs-4 mb-3 rb"><i class="bi bi-newspaper color-primary i40"></i> News & Achievements</h2>
+        <div class="panel panel-body">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-auto">
+                <ul id="news" class="list-group-item">
+  <li class="news-item"><span><img src='https://www.niser.ac.in/assets/pix/newspix/260526_sbedanta.png' class="img-thumbnail float-start" style="margin:0 5px 0 0"></span>Prof. Subhankar Bedanta of School of Physical Sciences has been selected for the &quot;Samanta Chandra Sekhar Award 2024&quot; by Odisha Bigyan Academy in the category of &quot;Physical Sciences&quot;. <a href="<nolink>"></a></li>
+  <li class="news-item"><span><img src='https://www.niser.ac.in/assets/pix/newspix/150526_cgunanathan.png' class="img-thumbnail float-start" style="margin:0 5px 0 0"></span>Prof. Chidambaram Gunanathan (School of Chemical Sciences) has been awarded the INSA Distinguished Lectures - 2026 <a href="https://insaindia.res.in/pdf/CURRENT_Recipients_IDL-1.pdf"><i class="bi-arrow-right-short"></i> Read more</a></li>
+  <li class="news-item"><span><img src='https://www.niser.ac.in/assets/pix/newspix/140526_jayesh_photo.jpg' class="img-thumbnail float-start" style="margin:0 5px 0 0"></span>Dr. Jayesh M Goyal (School of Earth and Planetary Sciences) has been awarded the INSA Young Associates (IYA) - 2026. <a href="https://insaindia.res.in//pdf/CURRENT_RECIPIENTS_OF_INSA_YOUNG_ASSOCIATES_IYA.pdf"><i class="bi-arrow-right-short"></i> Read more</a></li>
+  <li class="news-item"><span><img src='https://www.niser.ac.in/assets/pix/newspix/130824_nirf-hbni.png' class="img-thumbnail float-start" style="margin:0 5px 0 0"></span>HBNI ranked 07 in Research, 12 in University and 20 in Overall category under NIRF Ranking 2025. <a href="https://www.nirfindia.org/nirfpdfcdn/2025/pdf/Report/IR2025_Report.pdf"><i class="bi-arrow-right-short"></i> Read more</a></li>
+  <li class="news-item"><span><img src='https://www.niser.ac.in/assets/pix/newspix/040725_1000066551.png' class="img-thumbnail float-start" style="margin:0 5px 0 0"></span>Prof. Himansu S Biswal of the School of Chemical Sciences, has been selected to receive the CRSI (Chemical Research Society of India) Bronze medal - 2026. <a href="<nolink>"></a></li>
+  <li class="news-item"><span><img src='https://www.niser.ac.in/assets/pix/newspix/270525_breakthrough_prize.jpg' class="img-thumbnail float-start" style="margin:0 5px 0 0"></span>DAE Press Release: NISER scientists share Breakthrough Prize-2025. <a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2131339"><i class="bi-arrow-right-short"></i> Read more</a></li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer mt-2"><span class="float-end"><a href="/news-archive" class="color-blue">view archive<i class='bi-chevron-right'></i></a></span></div>
+        </div>
+      </div>
+<!-- End News -->
+<!-- Begin Event -->   
+      <div class="feature col" style="overflow-y:auto"><!--height:470px-->
+        <h5 class="fs-4 mb-3 rb"><i class="bi-bi bi-calendar2-week color-primary i40"></i> Events</h5>
+        <ul class="list-group">
+  	  	<li class="list-group-item d-flex justify-content-between align-items-start" title="Until 27 Sep" data-bs-toggle="tooltip"><!--ongoing event bg-warning-subtle-->
+			<div class="ms-0 me-auto">
+				<div><a href='https://sites.google.com/view/hynanous-2026/'>Hybrid Nanoscience for Growth and Ultrafast Spectroscopy (HyNanoUS-2026)</a></div>
+				NISER, CSIR-IMMT
+			</div>
+			<ul class="list-group float-end" style="font-size:14px;text-align:center;">
+				<li class="list-group-item p-0 bg-primary color-white"><b>25</b></li>
+				<li class="list-group-item p-1 pt-0 bg-info-subtle fw-light">Sep<br>2026</li>
+			</ul>
+		</li>
+          </ul>
+        <br>
+        <a href="/events-archive" class="color-blue float-end">view archive<i class='bi-chevron-right'></i></a>
+      </div>
+<!-- End Event -->
+<!-- Begin Announcement -->   
+      <div class="feature col">
+        <h5 class="fs-4 mb-3 rb"><i class="bi bi-megaphone color-primary i40"></i> Announcements</h5>
+        <!-- begin scroller -->        
+        <div class="panel panel-body">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-auto" style="height:auto">
+                <ul id="announcement" class="list-group-item">
+    	      <li class="news-item"><font color=brown>1</font>.
+							<!--<a href='#' onClick="passname(this, '/notices/2026/recruitments/PDF_Advt_2026_SCS_21072026.pdf')" style="color: ">-->
+				<a href="/storage/notices/2026/recruitments/PDF_Advt_2026_SCS_21072026.pdf" style="color: ">
+							PDF in SCS: NISER/SCS/PDF/NP/2026-2027(3)</a> </li>
+        	      <li class="news-item"><font color=brown>2</font>.
+							<!--<a href='#' onClick="passname(this, '/notices/2026/recruitments/Shortlisted_NISER-RC-2025-NA-02.pdf')" style="color: green">-->
+				<a href="/storage/notices/2026/recruitments/Shortlisted_NISER-RC-2025-NA-02.pdf" style="color: green">
+							Revised Shortlist : Registrar &amp; PSO (NISER/RC/2025/NA/02)</a> </li>
+        	      <li class="news-item"><font color=brown>3</font>.
+							<!--<a href='#' onClick="passname(this, '/notices/2026/recruitments/SPS_PDF-RA_Advt_02_2026.pdf')" style="color: ">-->
+				<a href="/storage/notices/2026/recruitments/SPS_PDF-RA_Advt_02_2026.pdf" style="color: ">
+							PDF/RA in SPS: NISER/SPS/PDF-RA/02-2026</a> </li>
+        	    	    	    	    </ul>
+  <p></p>
+	<form name='pdf' action="/readpdf.php" method="post">
+		<input type="hidden" name="_token" value="rCV8QnuhdOlAuFOJmF9LyTtddwPJqhWY4t6QzBZW">		<input type="hidden" name="file">
+	</form>		
+	<script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" type="text/javascript">
+		function passname(obj,fnm){
+			obj.addEventListener("click",function(event){event.preventDefault()});
+			document.pdf.file.value = fnm;
+			document.pdf.submit();
+		}
+	</script>
+  <ul id="fixed" class="list-group-item">
+      	    	    	    	    	<li class="news-item"><font color=brown>4</font>.
+							<!--<a href='#' onClick="passname(this, '/notices/2026/recruitments/SEPS_PDF_Advt_2026_Plan_Rolling.pdf')" style="color: ">-->
+				<a href="/storage/notices/2026/recruitments/SEPS_PDF_Advt_2026_Plan_Rolling.pdf" style="color: ">	
+						PDF in EPS: NISER/SEPS/PDF/Plan/2026-2027</a> </li>
+        	    	<li class="news-item"><font color=brown>5</font>.
+							<!--<a href='#' onClick="passname(this, '/notices/2026/recruitments/SEPS_PDF_Advt_2026_NP_Rolling.pdf')" style="color: ">-->
+				<a href="/storage/notices/2026/recruitments/SEPS_PDF_Advt_2026_NP_Rolling.pdf" style="color: ">	
+						PDF in EPS: NISER/SEPS/PDF/NP/2026-2027</a> </li>
+        	    	<li class="news-item"><font color=brown>6</font>.
+							<!--<a href='#' onClick="passname(this, '/notices/2025/recruitments/PDF_Rolling_Advt_30042025.pdf')" style="color: ">-->
+				<a href="/storage/notices/2025/recruitments/PDF_Rolling_Advt_30042025.pdf" style="color: ">	
+						Post-Doctoral Fellow Positions</a> </li>
+        	    	<li class="news-item"><font color=brown>7</font>.
+							<!--<a href='/acad-announcements' style="color: ">-->
+				<a href='/acad-announcements' style="color: ">
+						Academic Announcements</a> </li>
+        
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer mt-2"><span class="float-end"><a href="/ann-curr" class="color-blue">view all at once<i class='bi-chevron-right'></i></a></span></div>
+        </div>
+        <!-- end scroller -->        
+      </div>
+  	</div>
+  </div>
+<!-- End Announcement -->
+<!-- Begin Carousel-II -->
+  <div class="container my-3">
+		<div class="row mx-auto my-auto justify-content-center">
+      <h2 class="fs-4 mb-3 p-0 align-content-start"><i class="bi bi-clipboard-data color-primary i40"></i> Research Highlights
+      <span class="float-end mt-2"><a class="btn btn-outline-primary btn-xs" href="#researchCarousel" role="button" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></a>
+      <a class="btn btn-outline-primary btn-xs" href="#researchCarousel" role="button" data-bs-slide="next"><i class="bi bi-chevron-right"></i></a>&nbsp;</span></h2>
+			<div id="researchCarousel" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-inner" role="listbox">
+  	<div class="carousel-item active">
+	  <div class="col-md-3 p-1">
+	    <div class="card">
+	      <img src="https://www.niser.ac.in/assets/pix/researchHighlight/290620261723_highlight.webp" class="card-img-top">
+	      <div class="card-body" style="height:100px"><p class="resFont">Raman spectra from matrix of volatile-rich clasts within brecciated achondrite meteorites <a href='http://doi.org/10.1111/maps.70183' class="bi-link-45deg" target="_blank">read more</a></p></div>
+	    </div>
+	  </div>
+	</div>
+	  
+		<div class="carousel-item">
+	  <div class="col-md-3 p-1">
+	    <div class="card">
+	      <img src="https://www.niser.ac.in/assets/pix/researchHighlight/230620261512_highlight.webp" class="card-img-top">
+	      <div class="card-body" style="height:100px"><p class="resFont">Fig. caption: (a,b,d,e) Anomalous current and nonlocal odd-frequency equal-spin triplet pairing in trilayer junctions; (c,f) bilayer pairing. Short-junction: (a–c), long-junction: (d–f). <a href='https://journals.aps.org/prb/abstract/10.1103/7mv5-q39y' class="bi-link-45deg" target="_blank">read more</a></p></div>
+	    </div>
+	  </div>
+	</div>
+	  
+		<div class="carousel-item">
+	  <div class="col-md-3 p-1">
+	    <div class="card">
+	      <img src="https://www.niser.ac.in/assets/pix/researchHighlight/010620261415_highlight.webp" class="card-img-top">
+	      <div class="card-body" style="height:100px"><p class="resFont">Ruthenium-Catalyzed [4 + 2] Cycloaddition of Chromanone Dienes Using Triethylamine as an Ethylene Surrogate <a href='https://pubs.acs.org/doi/10.1021/acs.orglett.6c01710' class="bi-link-45deg" target="_blank">read more</a></p></div>
+	    </div>
+	  </div>
+	</div>
+	  
+		<div class="carousel-item">
+	  <div class="col-md-3 p-1">
+	    <div class="card">
+	      <img src="https://www.niser.ac.in/assets/pix/researchHighlight/050520261820_highlight.webp" class="card-img-top">
+	      <div class="card-body" style="height:100px"><p class="resFont">On projective representations of special <em>p</em>-groups <a href='https://www.degruyterbrill.com/document/doi/10.1515/jgth-2025-0068/html' class="bi-link-45deg" target="_blank">read more</a></p></div>
+	    </div>
+	  </div>
+	</div>
+	  
+		<div class="carousel-item">
+	  <div class="col-md-3 p-1">
+	    <div class="card">
+	      <img src="https://www.niser.ac.in/assets/pix/researchHighlight/050520261819_highlight.webp" class="card-img-top">
+	      <div class="card-body" style="height:100px"><p class="resFont">On the twisted group ring isomorphism problem for a class of groups <a href='https://www.sciencedirect.com/science/article/pii/S0021869324005118' class="bi-link-45deg" target="_blank">read more</a></p></div>
+	    </div>
+	  </div>
+	</div>
+	  
+		<div class="carousel-item">
+	  <div class="col-md-3 p-1">
+	    <div class="card">
+	      <img src="https://www.niser.ac.in/assets/pix/researchHighlight/170420261558_highlight.webp" class="card-img-top">
+	      <div class="card-body" style="height:100px"><p class="resFont">Dihydroartemisinin suppresses glioma progression and metastatic spread in vivo <a href='https://link.springer.com/article/10.1186/s12935-025-04148-4' class="bi-link-45deg" target="_blank">read more</a></p></div>
+	    </div>
+	  </div>
+	</div>
+	  
+					</div>
+			</div>
+		</div>		
+	</div>
+<!-- End Carousel-II -->
+<!-- Begin Grid-II -->
+	<div class="container">
+  	<div class="row g-2">
+    	<div class="col-4 text-center">
+      	<div class="ovimg" style="background-image:url('https://www.niser.ac.in/assets/pix/research.jpg');background-size:cover;cursor:pointer" onClick="document.getElementById('box1').click()">
+          <div class="curtain">
+            <div class="text"><a href='/resdev' id='box1' class="link-warning">R & D<br><img src="assets/pix/research.png" style="filter:invert(1)"></a></div>
+          </div>
+        </div>
+      </div>
+    	<div class="col-4 text-center">
+      	<div class="ovimg" style="background-image:url('https://www.niser.ac.in/assets/pix/8thGrad.jpg');background-size:cover;cursor:pointer" onClick="document.getElementById('box2').click()">
+          <div class="curtain">
+            <div class="text"><a href='/acad/admission' id='box2' class="link-warning">ADMISSIONS<br><img src="assets/pix/admission.png" style="filter:invert(1)"></a></div>
+          </div>
+        </div>
+      </div>
+    	<div class="col-4 text-center">
+      	<div class="ovimg" style="background-image:url('https://www.niser.ac.in/assets/pix/outreach.jpg');background-size:cover;cursor:pointer" onClick="document.getElementById('box3').click()">
+          <div class="curtain">
+            <div class="text"><a href='/outreach' id='box3' class="link-warning" style="pointer-events: auto;">OUTREACH<br><img src="assets/pix/outreach.png" style="filter:invert(1)"></a></div>
+          </div>
+        </div>
+      </div>
+		</div>
+	</div>    
+<!-- End Grid-II -->
+<!-- Begin Grid-III -->
+  <div>
+    <div class="container py-3">
+      <div class="row g-2">
+        <div class="col-4 text-center">
+          <a href='/career/staff/reg/cr' class="btn btn-outline-secondary h-100" style="width:100%;transition:.3s" id='grid3_1' onMouseOver="gBtn_h(3,1)" onMouseOut="gBtn(3,1)"><img id='gb3_1' class="gridblock" src="https://www.niser.ac.in/assets/pix/job.png"><br>Vacancy (Regular)</a>
+        </div>
+        <div class="col-4 text-center">
+          <a href='/career/staff/ft/cr' class="btn btn-outline-secondary h-100" style="width:100%;transition:.3s" id='grid3_2' onMouseOver="gBtn_h(3,2)" onMouseOut="gBtn(3,2)"><img id='gb3_2' class="gridblock" src="https://www.niser.ac.in/assets/pix/job-search.png"><br>Vacancy (Fixed-Term)</a>
+        </div>
+        <div class="col-4 text-center">
+          <a href='/tenders/cr' class="btn btn-outline-secondary h-100" style="width:100%;transition:.3s" id='grid3_3' onMouseOver="gBtn_h(3,3)" onMouseOut="gBtn(3,3)"><img id='gb3_3' class="gridblock" src="https://www.niser.ac.in/assets/pix/job-offer.png"><br>Tender Notices</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+<!-- End Grid-III -->
+<!-- The script below scrolls to 'main-content' after few seconds -->
+<!--
+  <script nonce="AmeE6QpAeTcTjCHqmN6wcQ==">
+    document.addEventListener('DOMContentLoaded', function() {
+      const skipLinkTarget = document.getElementById('main-content');
+      const delayInMilliseconds = 3000; // 3 sec
+      if (skipLinkTarget) {
+        setTimeout(() => {
+          skipLinkTarget.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }, delayInMilliseconds);
+      }
+    });
+  </script>
+-->
+<!-- Begin Footer -->
+<div class="container bg-primary-dark">
+  <div class="row">
+    <div class="col-md-12 text-center" style="">
+        &nbsp;
+    </div>
+   </div>
+</div>
+<footer class="footer-02">
+    <div class="container bg-primary-dark color-white">
+      <div class="row">
+        <div class="col-md-4 ms-auto mt-2 mb-2 text-center">
+          <i class="bi bi-check2-square fs-3"></i> Affiliated to <a href="http://hbni.ac.in/" class="color-yellow fs-6" target="_blank">HBNI</a>.
+        </div>
+        <div class="col-md-4 ms-auto mt-2 mb-2 text-center">
+          <i class="bi bi-check2-square fs-4"></i> Aided by <a href="https://dae.gov.in/" class="color-yellow fs-6" target="_blank">DAE</a>.
+        </div>
+        <div class="col-md-4 ms-auto mt-2 mb-2 text-center">
+          <i class="bi bi-check2-square fs-4"></i> Autonomous in nature.
+        </div>
+      </div>
+    </div>
+    <div class="container" style="padding-top:20px">
+      <div class="row">
+        <div class="col-md-4 col-lg-5">
+          <div class="row">
+            <div class="col-md-12 col-lg-8 mb-md-0 mb-4">
+              <h2 class="footer-heading"><a href="/" class="p-0 logo">niser <i class="bi-circle-fill color-cyan"></i> ac.in</a></h2>
+              <img class="logo m-1 pb-1" src="/assets/pix/NLogo-Grey.png" height="100">
+              <p class="copyright">
+                <i class="bi-envelope color-cyan"></i> &#9656; At/PO: Jatni, Dist: Khurda, Odisha - 752050, India<br>
+                <i class="bi-send color-cyan"></i> &#9656; registrar<i class="bi-at"></i>niser.ac.in<br>
+                <i class="bi-telephone color-cyan"></i> &#9656; +91-674-2494049 / 4005
+              </p>
+							<p class="d-flex align-items-center">
+								<span id="ss_img_wrapper_gmogs_image_100-40_en_white"><a href="https://www.globalsign.com/" rel="nofollow" target="_blank" title="GlobalSign Site Seal"><img alt="SSL" border="0" id="ss_img" src="https://seal.globalsign.com/SiteSeal/images/gs_noscript_100-40_en.gif"></a>
+								</span>
+								<script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" type="text/javascript" src="https://seal.globalsign.com/SiteSeal/gmogs_image_100-40_en_white.js"></script>
+                 &nbsp;|&nbsp;<a href="/docs/VAPT_STH_NISER_20Feb26-19Feb27.pdf"><img src="/assets/pix/STH.webp" style="height:32px;filter: brightness(0.7)" alt="Safe to Host"></a>
+							</p>
+						</div>
+          </div>
+        </div>
+        <div class="col-md-8 col-lg-7">
+          <div class="row">
+            <div class="col-md-4 mb-md-0 mb-4 border-left">
+              <h2 class="footer-heading"><i class="bi bi-binoculars color-cyan"></i> Discover</h2>
+              <ul class="list-unstyled">
+                <li class="mb-1"><a href="/findentity" class="btn btn-xs btn-primary text-white">Find People <i class="bi-search"></i></a></li>
+                <li><a href="/about/contacts" class="py-1 d-block">Contacts</a></li>
+                <li><a href="https://goo.gl/maps/zPaYMZfXZUzy5hDR8" class="py-1 d-block">Map: Coordinates <i class="bi-link-45deg"></i></a></li>
+                <li><a href="/content/phbook" class="py-1 d-block">Phone Book</a></li>
+                <li><a href="/content/pc-carousel" class="py-1 d-block">Photo Credits: Main Carousel</a></li>
+                <li><a href="/content/sitemap" class="py-1 d-block">Sitemap</a></li>
+                <li><a href="/content/emergency-contacts" class="py-1 d-block">24 x 7 Emergency Contacts</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 mb-md-0 mb-4 border-left">
+              <h2 class="footer-heading"><i class="bi bi-bar-chart-steps color-cyan"></i> Deep Dive</h2>
+              <ul class="list-unstyled">
+                <li class="mb-1"><a href="/intranet" class="btn btn-xs btn-primary text-white">INTRANET <i class="bi-cloud-slash"></i></a></li>
+                <li><a href="/tenders/cr" class="py-1 d-block">Tender Notices &amp; Results</a></li>
+                <li><a href="/storage/notices/2022/Procurement_Plan_of_Major_Equipments.pdf" class="py-1 d-block">Procurement Plan of Major Equipments</a></li>
+                <li><a href="/content/holidays" class="py-1 d-block">Holidays</a></li>
+                <li><a href="/about/newsletter" class="py-1 d-block">Newsletter</a></li>
+                <li><a href="/about/annualreport" class="py-1 d-block">Annual Reports</a></li>
+                <li><a href="https://niser.irins.org/" class="py-1 d-block">Indian Research Info. Network System <i class="bi-link-45deg"></i></a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 mb-md-0 mb-4 border-left">
+              <h2 class="footer-heading"><i class="bi bi-chat-right-text color-cyan"></i> Charter</h2>
+              <ul class="list-unstyled">
+                <li><a href="/content/rti" class="py-1 d-block">Right to Information</a></li>
+                <li><a href="/content/sc-st-obc-cell" class="py-1 d-block">SC-ST-OBC Cell</a></li>
+                <li><a href="/content/women-cell" class="py-1 d-block">Internal Complaints Committee</a></li>
+                <li><a href="/content/pwd-grievance-cell" class="py-1 d-block">PWD Grievance Redressal Cell</a></li>
+                <li><a href="/content/disc-action-structure" class="py-1 d-block">Structure of Disciplinary Action (Hostel)</a></li>
+                <li><a href="/content/disc-action-committee" class="py-1 d-block">Disciplinary Action Comm. for Students</a></li>
+                <li><a href="/content/hostel-rules" class="py-1 d-block">Hostel Rules</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row partner-wrap mt-0">
+        <div class="row align-items-center">
+          <div class="col-md-3">
+            <h2 class="footer-heading mb-0" align="center">We are social too:</h2>
+          </div>
+          <div class="col-md-3">
+            <p class="partner-name mb-0" align="center">
+              <a href="https://www.facebook.com/niser.official/" target="_blank"><span class="bi bi-facebook fb fs-2"></span></a>
+              <a href="https://in.linkedin.com/school/niser-official/" target="_blank"><span class="bi bi-linkedin in fs-2"></span></a>
+              <a href="https://twitter.com/niser_official/" target="_blank"><span class="bi bi-twitter-x tw fs-2"></span></a>
+              <a href="https://www.instagram.com/niser.official/" target="_blank"><span class="bi bi-instagram insta fs-2"></span></a>
+              <a href="https://www.youtube.com/channel/UCZR2fbT8eDXE6mCMlUp-rcQ" target="_blank"><span class="bi bi-youtube yt fs-2"></span></a>
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p class="partner-name mb-0" align="center">
+              <a href="https://censusindia.gov.in/census.website/hi"><img class="govt p-1" src="/assets/pix/census-2027.png" style="height:120px;width:auto"></a>
+              <a href="https://innovateindia.mygov.in/viksitbharat2047/"><img class="govt p-1" src="/assets/pix/vikshit-bharat-abhiyan.png" style="height:80px;width:auto"></a>
+              <a href="https://missionlife-moefcc.nic.in/"><img class="govt p-1" src="/assets/pix/mission-LiFE.png" style="height:80px;width:auto"></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-black">
+      <div class="container">
+        <div class="row mt-2 p-2">
+          <div class="col-md-8 col-lg-8">
+            <p class="copyright mb-2">
+              <i class="bi-c-circle"></i> 2026 Rights reserved <i class="bi-three-dots-vertical"></i> Handcrafted with <img src="/assets/pix/laravel-icon.png"> by <a href="/cc">Computer Centre</a>
+            </p>
+          </div>
+          <div class="col-md-4 col-lg-4 justify-content-end">
+            <p class="copyright mb-2" style="text-align:right">
+              <a class="mr-md-3" href="#">Terms</a> | <a class="mr-md-3" href="#">Privacy</a> | <a class="mr-md-3" href="#">Compliances</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+<!-- End Footer -->
+  <a href="#" class="scroll-top d-flex align-items-right justify-content-center" style="padding:0"><i class="bi bi-arrow-up-short"></i></a>
+<!-- Begin Cookie-Consent -->
+  <div class="alert text-center cookiealert" role="alert">
+    &#x1F36A; NISER uses cookies to store the light/dark theme and language preferences only.
+    <button type="button" class="btn btn-primary btn-sm acceptcookies">Ok, got it</button> <a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank">Learn more</a>
+  </div>
+<!-- JavaScript -->
+  <script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" type="text/javascript">
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+  </script>
+  <script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" src=https://www.niser.ac.in/build/assets/main.js?v=1.1></script>
+  <script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" src=https://www.niser.ac.in/build/assets/cookiealert.js></script>
+  <script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" src=https://www.niser.ac.in/build/assets/jquery.bootstrap.newsbox.min.js></script>
+	<script nonce="AmeE6QpAeTcTjCHqmN6wcQ==" src="https://www.niser.ac.in/build/assets/custom.js?v=1782375147"></script>
+</body>
+</html>
